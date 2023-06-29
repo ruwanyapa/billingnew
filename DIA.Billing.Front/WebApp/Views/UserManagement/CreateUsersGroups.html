@@ -1,0 +1,203 @@
+﻿<h1 ng-bind="Title()"></h1>
+
+    <div class="container">
+        <form class="form-horizontal" name="CreateUsersGroupForm" ng-submit="createUserGroupFormSubmit(CreateUsersGroupForm.$valid)" >
+           
+            <message ng-model="alertMessage"></message>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="widget">
+                        <div class="widget-body">
+                            <fieldset>
+
+                                <div class="form-group" ng-class="">
+                                    <label class="col-sm-5 control-label">Group ID</label>
+                                    <div class="col-sm-7">
+                                        <div class="input-group">
+                                            <input type="text"
+                                                   ng-disabled="disabled.GroupID"
+                                                   class="k-input k-textbox k-fill"
+                                                   name="GroupId" maxlength="8"
+                                                   ng-model="userGroups.GroupId"
+                                                   ng-blur="getUserGroupsByGroupCode()">
+                                            <!--ng-minlength="1"-->
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default" type="button" ng-click="reset()" name="Cancel" ng-disabled="disabled.Cancel" tooltip title="{{label.create}}"><i class="icon icon_plus"></i></button>
+
+                                                <button class="btn btn-default" type="button" ng-click="finderGropID.open()" tooltip title="{{label.search}}"><i class="icon icon_search"></i></button>
+                                            </span><!--data-toggle="modal" data-target="#modalUserId"-->
+                                        </div>
+                                    </div>
+                                </div> 
+
+                             <!--   <div class="form-group" ng-class="{ 'has-error' : CreateUsersGroupForm.GroupDescription.$invalid && !CreateUsersGroupForm.GroupDescription.$pristine }">-->
+                                <div class="form-group" ng-class="{ 'has-error' : hasError(CreateUsersGroupForm.GroupDescription) }">
+
+                                    <label class="col-sm-5 control-label">Group Description</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" name="GroupDescription" ng-model="userGroups.GroupDescription" class="k-input k-textbox k-fill " maxlength="20" ng-disabled="disabled.GroupDesc" required>
+                                        <p class="help-block" ng-show="hasError(CreateUsersGroupForm.GroupDescription, ErrorTypes.Maxlength)">Group Description is Allow less than 25 character"</p>
+                                        <p ng-show="CreateUsersGroupForm.GroupDescription.$invalid && !CreateUsersGroupForm.GroupDescription.$pristine" class="help-block"> Group Description is required.</p>
+                                         </div>
+
+                                </div>
+                                <div class="form-group margin-bottom-0" permission-code="'10053'">
+                                    <div class="col-sm-7 col-sm-offset-5">
+                                        <label class="checkbox">
+                                            <input type="checkbox" name="status" ng-model="userGroups.status" /> Inactive
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="widget">
+
+                        <div class="widget-title">
+                            <div class="clearfix">
+                                <label class="pull-left" for="switch-copy">Copy</label>
+                                <div class="pull-right"><label class="switch"><input id="switch-copy" ng-model="userGroups.switchCopy" type="checkbox"><span></span></label></div>
+                            </div>
+                        </div>
+
+                        <div class="widget-body">
+                            <fieldset ng-disabled="!userGroups.switchCopy">
+
+                                <div class="form-group" ng-class="{ 'has-error' : CreateUsersGroupForm.FromUserGroup.$invalid && !CreateUsersGroupForm.FromUserGroup.$pristine }">
+                                    <label class="col-sm-5 control-label">From User Group</label>
+                                    <div class="col-sm-7">
+                                        <div class="input-group">
+                                            <input type="text"
+                                                   class="k-input k-textbox k-fill"
+                                                   name="FromUserGroup"
+                                                   
+                                                   ng-model="userGroups.FromUserGroup"
+                                                   ng-blur="getPermissionFormUserGroupsByGroupCode()"
+                                                   ng-required="userGroups.switchCopy">
+                                            <span class="input-group-btn">
+                                                <!--<button class="btn btn-default" type="button" ng-click="resetcopy()" name="Cancel" ng-disabled="disabled.Cancel" tooltip title="{{label.create}}"><i class="icon icon_plus"></i></button>-->
+                                                <button class="btn btn-default" type="button" ng-click="finderUserGroup.open()" tooltip title="{{label.search}}"><i class="icon icon_search"></i></button>
+                                            </span><!--data-toggle="modal" data-target="#modalCopyId"-->
+                                        </div>
+                                        <p ng-show="CreateUsersGroupForm.FromUserGroup.$invalid && !CreateUsersGroupForm.FromUserGroup.$pristine" class="help-block"> From User Group Should be greater than 2 Characters.</p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group margin-bottom-0" ng-class="{ 'has-error' : CreateUsersGroupForm.GroupDescription1.$invalid && !CreateUsersGroupForm.GroupDescription1.$pristine }">
+                                    <label class="col-sm-5 control-label">Group Description</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" name="GroupDescription1" ng-model="userGroups.GroupDescription1" class="k-input k-textbox k-fill " maxlength="30" ng-required="userGroups.switchCopy">
+                                        <p class="help-block" ng-show="hasError(CreateUsersGroupForm.GroupDescription1, ErrorTypes.Maxlength)">Group Description is Allow less than 30 character"</p>
+
+                                        <p ng-show="CreateUsersGroupForm.GroupDescription1.$invalid && !CreateUsersGroupForm.GroupDescription1.$pristine" class="help-block"> Group Description is required.</p>
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="widget">
+                        <div class="widget-body">
+                            <fieldset>
+
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <label class="control-label">Module</label>
+                                        <select kendo-drop-down-list required class="k-fill"
+                                                ng-model="UserGroup.ModuleName"
+                                                required class="k-fill"
+                                                k-placeholder="'Select Module'"
+                                                k-data-text-field="'ModuleDescription'"
+                                                k-data-value-field="'ModuleCode'"
+                                                k-data-source="ModuleCollections"
+                                            ng-change="loadGroupsByModuleId()"></select>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label class="control-label">UI/Report</label>
+                                        <select kendo-drop-down-list required class="k-fill"
+                                                ng-model="UserGroup.UIReport"
+                                                required class="k-fill"
+                                                k-placeholder="'Select UI/Report'"
+                                                k-data-text-field="'InterfaceDescription'"
+                                                k-data-value-field="'InterfaceCode'"
+                                                k-data-source="UiReportCollections"
+                                                ng-change="loadUserGrops()"></select>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div><label class="control-label">&nbsp;</label></div>
+                                        <button class="btn btn-sm btn-info" type="button" ng-click="CreateUsersGroupFilterReset();">Search</button>
+
+                                    </div>
+                                    <div class="col-sm-2">
+                                      </div>
+                                </div>
+
+                               <br />
+                                <div class="row">
+
+                                    <div class="col-sm-1">
+                                        <label class="control-label">Keyword</label>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="permissionDescription" maxlength="50" class="k-input k-textbox k-fill " ng-model="UserGroup.permissionDescription" ng-change="FilterPermissionGroupByKeyword()">
+
+                                    </div>
+                                    <div class="col-sm-4">
+                                        
+                                            <button class="btn btn-sm btn-info" type="button" ng-click="CreateUsersGroupFilterReset();">Search</button>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        
+                                    </div>
+                                </div>
+                                <br />
+                                    <br />
+                                    <br />
+                                <div id="grid"
+                                     kendo-grid="grid"
+                                     k-options="dgGrid.options()"
+                                     ng-init="Init('grid')"></div>
+
+                            </fieldset>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <button class="btn btn-primary" ng-click="createUserGroupFormSubmit()" type="button" ng-disabled="">Submit</button>
+                <!--<button class="btn btn-default" type="button" ng-click="CreateUsersGroupsReset(userGroups)">Reset</button>-->
+            </div>
+
+        </form>
+
+    </div>
+
+
+<finder-new id="finderGropID"
+            title="{{finderGropID.title}}"
+            params="finderGropID.params"
+            info="finderGropID.info"
+            callback="finderGropID.callback"></finder-new>
+
+
+<finder-new id="finderUserGroup"
+            title="{{finderUserGroup.title}}"
+            params="finderUserGroup.params"
+            info="finderUserGroup.info"
+            callback="finderUserGroup.callback"></finder-new>
+

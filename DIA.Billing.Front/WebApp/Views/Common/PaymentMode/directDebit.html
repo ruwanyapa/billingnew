@@ -1,0 +1,21 @@
+﻿<div>
+    <ng-form name="frmPayDDBIT">
+        <div class="form-group">
+            <message ng-model="alertMessageDDBIT" ng-hide ="true"></message>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Reference Code</label>
+            <div class="col-sm-8">
+                <input type="text"  id="ddbRefCode" class="k-input k-textbox k-fill" ng-model="DDB.DDBCode" name="DDBCode" ng-maxlength=" 20" maxlength="20" required />
+                <p ng-show="" class="help-block">Reference code is required</p>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-sm-8 col-sm-offset-4">
+                <button type="button" class="btn btn-success" ng-disabled="disabled.btnSaveDdb" ng-click="SaveDdb()">Save</button>
+            </div>
+        </div>
+    </ng-form>
+</div>

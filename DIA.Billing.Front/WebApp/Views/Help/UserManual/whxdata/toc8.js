@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc.js\"  name=\"Bulk Receipt Printing\"><item name=\"Bulk Receipt Printing\" url=\"Bulk_Receipt_Printing.htm\" /></data>";

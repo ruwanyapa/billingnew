@@ -1,0 +1,92 @@
+<div>
+    <message ng-model="payAlertMessage" ng-hide ="true"></message>
+
+    <ng-form name="frmPayCredit">
+        <div class="form-group" ng-class="{ 'has-error' : hasError(frmPayCredit.CcCardType)}">
+            <label class="col-sm-4 control-label">Card Type</label>
+            <div class="col-sm-8">
+                <select name="CcCardType"
+                        kendo-drop-down-list ng-change="ChangeCardType()"
+                        ng-model="CreditNexusCard.CcCardType"
+                        k-data-text-field="'Value'"
+                        k-data-value-field="'Key'"
+                        k-data-source="Initializer.CardTypes"
+                        required></select>               
+            </div>
+            <div class="col-sm-8">
+               <p ng-show="hasError(frmPayCredit.CcCardType, ErrorTypes.Required)" class="help-block">Card type is required</p>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : hasError(frmPayCredit.CcCardBankCode)}">
+            <label class="col-sm-4 control-label">Bank</label>
+            <div class="col-sm-8">
+                <select name="CcCardBankCode" class="k-fill"
+                        kendo-drop-down-list
+                        ng-model="CreditNexusCard.CcCardBankCode"
+                        k-data-text-field="'Value'"
+                        k-data-value-field="'Key'"
+                        k-data-source="Initializer.Banks"
+                        required></select>
+            </div>
+            <div class="col-sm-8">
+               <p ng-show="hasError(frmPayCredit.CcCardBankCode, ErrorTypes.Required)" class="help-block">Bank is required</p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Card Number</label>
+            <div class="col-sm-8">
+                <div class="input-group input-group-lg">
+                    <input type="text" class="k-input k-textbox k-fill" style="text-align:center"
+                           name="CcCardNo1" width="4" id="CcCardNo1" ng-keypress="ValidateLength(1,$event)"
+                           ng-model="CreditNexusCard.CcCardNo1" ng-change="FocusToNextTextBox(1,$event)"
+                           ng-disabled="disabled.disCcCardNo1" sp-validation="number"
+                           required /><span class="input-group-btn"></span>
+
+                    <input type="password" class="k-input k-textbox k-fill" style="text-align:center"
+                           name="CcCardNo2" id="CcCardNo2" ng-keypress="ValidateLength(2,$event)"
+                           ng-model="CreditNexusCard.CcCardNo2" ng-change="FocusToNextTextBox(2,$event)"
+                           ng-disabled="true" sp-validation="number"
+                           required /><span class="input-group-btn"></span>
+
+                    <input type="password" class="k-input k-textbox k-fill" style="text-align:center"
+                           name="CcCardNo3" id="CcCardNo3" ng-keypress="ValidateLength(3,$event)"
+                           ng-model="CreditNexusCard.CcCardNo3" ng-change="FocusToNextTextBox(3,$event)"
+                           ng-disabled="true" sp-validation="number"
+                           required /><span class="input-group-btn"></span>
+
+                    <input type="text" class="k-input k-textbox k-fill" style="text-align:center"
+                           name="CcCardNo4" id="CcCardNo4" ng-keypress="ValidateLength(4,$event)"
+                           ng-model="CreditNexusCard.CcCardNo4" ng-change="FocusToNextTextBox(4,$event)"
+                           sp-validation="number"
+                           required />
+                </div>
+            </div>
+            
+        </div>
+
+
+        <div class="form-group" ng-class="{ 'has-error' : hasError(frmPayCredit.CcApprovalCode)}">
+            <label class="col-sm-4 control-label">Approval Code</label>
+            <div class="col-sm-8">
+                <input type="text" class="k-input k-textbox k-fill"
+                       name="CcApprovalCode" id="CcApprovalCode"
+                       ng-model="CreditNexusCard.CcApprovalCode"
+                       maxlength="6"
+                       sp-validation="number"
+                       required />
+            </div>
+            <div class="col-sm-8">
+               <p ng-show="hasError(frmPayCredit.CcApprovalCode, ErrorTypes.Required)" class="help-block">Approval code is required</p>
+                <p ng-show="hasError(frmPayCredit.CcApprovalCode, ErrorTypes.Maxlength)" class="help-block">Approval code length should be less than 4</p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-8 col-sm-offset-4">
+                <button type="button" class="btn btn-success" ng-disabled="disabled.btnSaveCc" ng-click="SaveCreditNexusCard(frmPayCredit)">Save</button>
+            </div>
+        </div>
+    </ng-form>
+</div>

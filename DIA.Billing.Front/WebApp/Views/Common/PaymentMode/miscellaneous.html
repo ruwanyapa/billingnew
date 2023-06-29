@@ -1,0 +1,44 @@
+<div>
+     <ng-form name="frmPayMiscellaneous">
+         <div class="form-group">
+             <message ng-model="alertMessageMis" ng-hide ="true"></message>  
+         </div>
+        <div class="form-group" ng-class="{ 'has-error' : hasError(frmPayMiscellaneous.MisPayModeCategory)}">
+            <label class="col-sm-4 control-label">Payment Mode Category</label>
+            <div class="col-sm-8">
+               <select name="MisPayModeCategory"
+                        kendo-drop-down-list
+                        ng-model="Miscellaneous.MisPayModeCategory"
+                        k-data-text-field="'Value'"
+                        k-data-value-field="'Key'"
+                        k-data-source="Initializer.PayModeCategories"
+                        required>
+                    </select>  
+               <p ng-show="hasError(frmPayMiscellaneous.MisPayModeCategory, ErrorTypes.Required)" class="help-block">Payment mode category is required</p>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : hasError(frmPayMiscellaneous.MisRefCode)}">
+            <label class="col-sm-4 control-label">Reference Code</label>
+            <div class="col-sm-8">
+                <input type="text" name="MisRefCode" class="k-input k-textbox k-fill" ng-model="Miscellaneous.MisRefCode" ng-blur="Validate(3)" maxlength="100"  /><!required--ng-keypress="Validate($event)"-->
+                 <!--<p ng-show="hasError(frmPayMiscellaneous.MisRefCode, ErrorTypes.Required)" class="help-block">Reference code is required</p>-->
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : hasError(frmPayMiscellaneous.Remarks)}">
+            <label class="col-sm-4 control-label">Remarks</label>
+            <div class="col-sm-8">
+                <textarea class="k-input k-textbox k-fill" rows="2" name="Remarks" ng-model="Miscellaneous.Remarks" ng-maxlength="128"></textarea>
+                 <p ng-show="hasError(frmPayMiscellaneous.Remarks, ErrorTypes.Maxlength)" class="help-block">Remarks should be less than 128</p>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-sm-8 col-sm-offset-4">
+                <button type="button" class="btn btn-success" ng-disabled="disabled.Misbutton" ng-click="SaveMiscellaneous(frmPayMiscellaneous)">Save</button>
+            </div>
+        </div>
+    </ng-form>
+</div>

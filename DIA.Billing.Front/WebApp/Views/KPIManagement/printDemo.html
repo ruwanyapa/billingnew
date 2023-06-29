@@ -1,0 +1,50 @@
+﻿<div>
+    <h4>  Demo 1 - Print to default Printer </h4>
+</div>
+<div>
+    <br>
+    <br>
+    <button class="btn btn-primary" ng-click="printTable()">Print table to default Printer</button>
+    <br>
+    <button class="btn btn-danger" ng-click="printHtml()">Print html String</button>
+    <br>
+    <button class="btn btn-success" ng-click="printHtmlListArray()">Print html Array</button>
+    <br>
+    <br>
+</div>
+<div ng-show="vm.printCompleted" class="alert alert-success" role="alert">
+    Print Completed
+</div>
+<div ng-repeat="d in data">
+    <div id="{{d.name}}">
+        <div>
+            <div class="pagebreak">
+                <table class="table">
+                    <caption> {{d.name}}</caption>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>{{d.name}}</th>
+                            <th>{{d.name}}</th>
+                            <th>{{d.name}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <th>{{d.info}}</th>
+                            <th>{{d.info}}</th>
+                            <th>{{d.info}}</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <th>{{d.info}}</th>
+                            <th>{{d.info}}</th>
+                            <th>{{d.info}}</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

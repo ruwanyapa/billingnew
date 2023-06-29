@@ -1,0 +1,69 @@
+﻿<h1 ng-bind="Title()"></h1>
+
+<div class="container">
+    <message ng-model="alertMessage" ng-hide="true"></message>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="widget">
+                <div class="widget-body">
+
+                    <form name="frmPayMethod" class="form-horizontal" novalidate>
+
+                        <div ng-class="" class="form-group">
+                            <label class="col-sm-5 control-label">Payment Method</label>
+                            <div class="col-sm-7">
+                                <div class="input-group">
+                                    <input type="text" name="sapCode" ng-model="PaymentMethod.Description" class="k-input k-textbox k-fill">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button" ng-click="finderPaymentMethod.open()" tooltip title=" {{label.search}}"><i class="icon icon_search"></i></button>
+                                        <button class="btn btn-default" type="button" ng-click="changePageState('NEW')" tooltip title="{{label.create}}"><i class="icon icon_plus"></i></button>
+                                    </span>
+                                </div>
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div ng-class="" class="form-group">
+                            <label class="col-sm-5 control-label">Mapping Code</label>
+                            <div class="col-sm-7">
+                                <input type="text" name="sapCode" ng-model="PaymentMethod.SapCode" ng-disabled="MapCode" ng-maxlength="6" ng-trim="false" ng-pattern="/^\S*$/" class="k-input k-textbox k-fill">
+                                <span style="color:red" ng-show="frmPayMethod.sapCode.$error.maxlength">
+                                    Mapping Code Should Contain Atleast 6 Characters
+                                </span><br>
+                                <span style="color:red" ng-show="frmPayMethod.sapCode.$error.pattern">
+                                    Please remove the spaces in Mapping Code
+                                </span>
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group margin-bottom-0 ng-isolate-scope">
+                            <div class="col-sm-7 col-sm-offset-5">
+                                <label class="checkbox">
+                                    <input type="checkbox" ng-model="PaymentMethod.InActive" name="status" class="ng-pristine ng-valid"> Inactive
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+            <div>
+                <button class="btn btn-success" type="button" ng-click="PostPaymentMethods()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<finder-new id="finderPaymentMethod"
+            title="{{finderPaymentMethod.title}}"
+            params="finderPaymentMethod.params"
+            info="finderPaymentMethod.info"
+            callback="finderPaymentMethod.callback"></finder-new>

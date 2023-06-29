@@ -1,0 +1,124 @@
+﻿<!doctype html>
+<html data-ng-app="DialogBilling" data-ng-controller="MainController">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-ng-bind="HeadTitle()"></title>
+
+    <link rel="stylesheet" href="Resources/style.css" />
+
+</head>
+<body ><!--data-ng-cloak-->
+    <div data-ng-if="isLoggedIn()"
+         id="kendo-splitter"
+         kendo-splitter
+         k-panes="panes"
+         k-orientation="'horizontal'"
+         k-rebind="panes">
+
+        <aside>
+            <header><a class="" href="#/dashboard"></a></header>
+            <navigation />
+            <footer>
+                <div class="zillione-logo"><a href="http://www.zillione.com/" target="_blank">Zillione Business Solutions</a></div>
+                <div class="links"><a href="">About</a><a href="">Settings</a><a href="">Help</a></div>
+                <div class="copy"> 2014 Dialog, All Rights Reserved.</div>
+                <div class="text-center"><a class="we" href="">a Zillion Product</a></div>
+            </footer>
+        </aside>
+
+        <main>
+            <div class="top-bar">
+                <div class="pull-left">
+                    <span class="menu-icon" ng-click="togglePanal()"><i class="icon icon_menu"></i></span>
+                </div>
+            </div>
+            <div data-ng-view></div>
+        </main>
+    </div>
+
+    <div class="container" data-ng-if="!isLoggedIn()" data-ng-controller="LoginController">
+
+        <form class="form-signin" role="form" name="LoginForm" ng-submit="attemptLogin(LoginForm.$valid)" novalidate>
+            <div class="row">
+                <div class="col-sm-5">
+                    <a class="product-logo" href="#"></a>
+                    <div class="zillione-logo"><a href="">Zillione Business Solutions</a></div>
+                    <!--<p><a href="" class="forget">Forget Password?</a></p>-->
+                </div>
+                <div class="col-sm-7 colored">
+                    <div class="pad-30">
+                        <h3 class="form-signin-heading">Sign in</h3>
+
+                        <message ng-model="alertMessage"></message>
+
+
+                        <input type="text"
+                               name="userId"
+                               ng-model="user.UserId"
+                               ng-blur="getOutlet()"
+                               class="form-control input-sm"
+                               placeholder="User Name"
+                               ng-disabled="domainUserAvailable"
+                               required autofocus />
+                        <!--ng-init="user.userId=domainUserId()" -->
+
+                        <input type="password"
+                               name="password"
+                               ng-model="user.Password"
+                               class="form-control input-sm"
+                               placeholder="Password"
+                               ng-disabled="!domainPasswordRequire"
+                               ng-required="domainPasswordRequire" />
+                        <br />
+                        <select kendo-drop-down-list
+                                class="k-fill login-dropdown"
+                                ng-model="user.Outlet"
+                                name="Outlet"
+                                k-placeholder="'Select'"
+                                k-data-text-field="'OutletDesc'"
+                                k-data-value-field="'OutletCode'"
+                                k-data-source="LogintypeTypecode"></select>
+
+                        <!--<div class="checkbox">
+                            <label>
+                                <input type="checkbox" value="remember-me"> Remember me
+                            </label>
+                        </div>-->
+
+                        <br />
+                        <br />
+                        <button class="btn btn-success btn-block" type="submit" ng-disabled="LoginForm.username.$invalid || LoginForm.password.$invalid">Sign in</button>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div> <!-- /container -->
+
+    <script src="Scripts/kendo/2014.1.528/jquery.min.js"></script>
+    <script src="Scripts/kendo/2014.1.528/kendo.all.min.js"></script>
+    <script src="Scripts/kendo/2014.1.528/kendo.aspnetmvc.min.js"></script>
+    <script src="Scripts/kendo.modernizr.custom.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <script src="Scripts/respond.js"></script>
+
+    <script src="Scripts/angularJS/angular.min.js"></script>
+    <script src="Scripts/angularJS/angular-route.min.js"></script>
+    <script src="Scripts/angularJS/angular-animate.min.js"></script>
+    <script src="Scripts/angularJS/angular-sanitize.min.js"></script>
+    <script src="Scripts/angularJS/angular-cookies.min.js"></script>
+    <script src="Scripts/angularJS/angular-kendo.min.js"></script>
+    <script src="Scripts/angularJS/hotkeys.js"></script>
+    <script src='Scripts/angularJS/textAngular/textAngular-sanitize.js'></script>
+    <script src='Scripts/angularJS/textAngular/textAngularSetup.js'></script>
+    <script src='Scripts/angularJS/textAngular/textAngular.js'></script>
+    <script src="Scripts/angularJS/loading-bar.js"></script>
+
+    <script src="Resources/app.min.js"></script>
+
+
+</body>
+</html>
+

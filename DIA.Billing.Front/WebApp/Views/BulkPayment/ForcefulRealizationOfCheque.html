@@ -1,0 +1,187 @@
+﻿<h1 ng-bind="Title()"></h1>
+
+<div class="container">
+
+    <!--<message ng-model="alertMessage"></message>-->
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="widget">
+                <div class="widget-body">
+
+                    <form class="form-horizontal" name="FromForcefulRealizationOfCheque" ng-submit="FromForcefulRealizationOfChequeSubmit(FromForcefulRealizationOfCheque)">
+
+                        <div class="row">
+                            <div class="col-md-6">
+
+                                <!--<div ng-class="" class="form-group">
+                    <label class="col-sm-5 control-label">Transaction ID</label>
+                    <div class="col-sm-7">
+
+                        <div class="input-group">
+                            <input type="text" class="k-input k-textbox k-fill" readonly="readonly"/>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" ng-click="TransactionIDSearch.open()" tooltip title="{{label.search}}"><i class="icon icon_search"></i></button>
+                                <button class="btn btn-default" type="button" ng-click="changePageState('NEW')" tooltip title="{{label.create}}"><i class="icon icon_plus"></i></button>
+                            </span>
+                        </div>
+                        <div ng-show="" class="ng-hide">
+                            <p ng-show="" class="help-block ng-hide">
+
+                            </p>
+                        </div>
+                    </div>
+                </div>-->
+
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Transaction ID</label>
+                                    <div class="col-sm-8">
+                                        <div class="input-group">
+                                            <input type="text"
+                                                   name="TransactionID"
+                                                   ng-model="ForcefulRealizationOfCheque.TransactionID"
+                                                   ng-blur="findrtransation()"
+                                                   class="k-input k-textbox k-fill"
+                                                   ng-disabled="true"
+                                                   required>
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default" type="button" ng-click="finderTransactionID.open()" tooltip title="{{label.search}}" data-toggle="modal" data-target="#transactionID"><i class="icon icon_search"></i></button>
+
+                                                <button class="btn btn-default" type="button" ng-disabled="disabled.NewFeild" ng-click="changePageState('NEW')" tooltip title="{{label.create}}"><i class="icon icon_plus"></i></button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group" ng-class="{ 'has-error' : hasError(FromForcefulRealizationOfCheque.checkNo)}">
+                                    <label class="col-sm-4 control-label">Cheque Number</label>
+                                    <div class="col-sm-8">
+                                  
+                                        <div class="input-group frcontainer">
+                                            <input type="text"
+                                                   required
+                                                   sp-validation="number"
+                                                   class="k-input k-textbox k-fill"
+                                                   ng-model="ForcefulRealizationOfCheque.checkNo"
+                                                   name="checkNo" maxlength="6"
+                                                   ng-disabled="ForcefulRealizationOfCheque.TransactionID"
+                                                   ng-maxlength="6"
+                                                   placeholder="Cheque No" />
+                                            <span class="input-group-btn"></span>
+                                            <input type="text"
+                                                   required
+                                                   sp-validation="number"
+                                                   class="k-input k-textbox k-fill"
+                                                   ng-model="ForcefulRealizationOfCheque.Bankcode"
+                                                   name="Bankcode" maxlength="4"
+                                                   ng-disabled="ForcefulRealizationOfCheque.TransactionID"
+                                                   ng-blur="CheckBankCode()"
+                                                   ng-maxlength="4"
+                                                   placeholder="Bank Code" />
+
+                                            <span class="input-group-btn"></span>
+                                            <input type="text"
+                                                   required
+                                                   sp-validation="number"
+                                                   class="k-input k-textbox k-fill"
+                                                   ng-model="ForcefulRealizationOfCheque.BranchCode"
+                                                   ng-disabled="ForcefulRealizationOfCheque.TransactionID"
+                                                   ng-blur="getBranchNameAndValidateCheckNo()"
+                                                   name="AccountNo"
+                                                   placeholder="BranchCode"
+                                                   ng-maxlength="3" maxlength="3"  />
+                                            <span class="input-group-btn"> - </span>
+                                            <span class="input-group-btn"><button class="btn btn-sm btn-info" ng-disabled="ForcefulRealizationOfCheque.TransactionID" type="button" ng-click="GetReceiptDetailsByChequeNo()" tooltip title="Retrieve"><i class="icon icon_document"></i></button></span>
+                                        </div>
+                                        <div ng-show="hasError(FromForcefulRealizationOfCheque.checkNo)">
+                                            <p class="help-block" ng-show="hasError(FromForcefulRealizationOfCheque.checkNo, ErrorTypes.maxlength)">
+                                                Cheque Number 6 character allow
+                                            </p>
+                                        </div>
+                                        <div ng-show="hasError(FromForcefulRealizationOfCheque.Bankcode)">
+                                            <p class="help-block" ng-show="hasError(FromForcefulRealizationOfCheque.Bankcode, ErrorTypes.Required)">
+                                                Bank Code is 4 character allow
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                                <!--<div class="form-group">
+                    <label class="col-sm-5 control-label">Cheque No</label>
+                    <div class="col-sm-7">
+                        <div class="input-group">
+                            <input type="text" class="k-input k-textbox k-fill" placeholder="Cheque No">
+                            <span class="input-group-btn"> - </span>
+                            <input type="text" class="k-input k-textbox k-fill" placeholder="Bank Code">
+                            <span class="input-group-btn"> - </span>
+                            <input type="text" class="k-input k-textbox k-fill" placeholder="BranchCode">
+
+                        </div>
+
+                        <div ng-show="" class="ng-hide">
+                            <p ng-show="" class="help-block ng-hide">
+
+                            </p>
+                        </div>
+                    </div>
+                </div>-->
+
+                            </div>
+                            <div class="col-md-6">
+
+                                <table class="table table-bordered  table-condensed  table-hover">
+
+                                    <tbody>
+                                        <tr><td width="60%">Date &amp; Time</td><td ng-bind="ForcefulRealizationOfCheque.CurrentDate|date:'dd MMM yyyy HH:mm:ss'" class=" ng-binding text-right"></td></tr>
+                                        <tr><td>Cheque Amount<td ng-bind="ForcefulRealizationOfCheque.amount|currency:''" class="ng-binding  text-right"></td></tr>
+                                        <tr><td>Cheque Date</td><td ng-bind="ForcefulRealizationOfCheque.ChequeDateTxt" class="ng-binding  text-right"></td></tr>
+                                        <tr><td>Bank name</td><td ng-bind="ForcefulRealizationOfCheque.bank" class="ng-binding  text-right"></td></tr>
+                                        <tr><td>Branch Name</td> <td ng-bind="ForcefulRealizationOfCheque.Branch" class="ng-binding  text-right"></td></tr>
+
+                                    </tbody>
+                                </table>
+
+                                <br /><br />
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="gId" tabindex="0"
+                                     kendo-grid="gId"
+                                     ng-init="InitA('gId')"
+                                     k-options="dgGrid.options()">
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <br />
+
+                        <button permission-code="'11092'" class="btn btn-primary" type="submit" ng-disabled="ForcefulRealizationOfCheque.TransactionID">Submit</button>
+                    </form>
+                </div>
+            </div>
+
+            <div>
+ 
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<finder-new id="finderTransactionID"
+            title="{{finderTransactionID.title}}"
+            params="finderTransactionID.params"
+            info="finderTransactionID.info"
+            callback="finderTransactionID.callback"></finder-new>

@@ -1,0 +1,143 @@
+<div>
+    <message ng-model="payAlertMessage" ng-hide ="true"></message>
+
+    <div class="form-group" ng-class="">
+        <div class="col-sm-4">
+            <label class="checkbox-inline">
+                <input class="checkbox" type="checkbox" ng-model="StarPoints.Mobile.RequestPin" ng-change="StRequestPinChanged()" />
+                NFC</label>
+        </div>
+        <div class="col-sm-8">
+            <div class="input-group">
+                <input type="text" class="k-input k-textbox k-fill" ng-model="StarPoints.Mobile.NfcCode" ng-disabled="!StarPoints.Mobile.RequestPin"/>
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button" ng-click="StRequestNfcPin()" ng-disabled="!StarPoints.Mobile.NfcCode">Retrieve</button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="">
+        <label class="col-sm-4 control-label">Star Points Ref. Type</label>
+        <div class="col-sm-8">
+            <label class="radio-inline">
+                <input ng-model="StarPoints.ReferenceType" ng-value="ReferenceTypes.Mobile" type="radio" />
+                Mobile
+            </label>
+            <label class="radio-inline">
+                <input ng-model="StarPoints.ReferenceType" ng-value="ReferenceTypes.Account" type="radio" />
+                DTV/DBN
+            </label>
+      
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="">
+        <label class="col-sm-4 control-label">Star Points Ref.Code</label>
+        <div class="col-sm-8">
+            <div class="input-group">
+                <input type="text" id="stpoRefCode" class="k-input k-textbox k-fill" ng-model="StarPoints.RefCode" />
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button" ng-click="StShowBalance()" ng-disabled="!StarPoints.RefCode">Show Balance</button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="">
+        <label class="col-sm-4 control-label">Available Balance</label>
+        <div class="col-sm-8">
+            <input type="text" class="k-input k-textbox k-fill" ng-model="StarPoints.AvlBalance" ng-readonly="true" />
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="">
+        <label class="col-sm-4 control-label">Eligible for Redemption</label>
+        <div class="col-sm-8">
+            <input type="text" class="k-input k-textbox k-fill" ng-model="StarPoints.RedemptionStatus" ng-readonly="true" />
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="">
+        <label class="col-sm-4 control-label"></label>
+        <div class="col-sm-8">
+            <button class="btn btn-primary" type="button" ng-click="StRequestQuestion()" ng-disabled="StarPoints.RefCodeEnabled">Request PIN</button>
+        </div>
+        </div>
+
+    <div class="form-group" ng-class="" ng-show="false">
+        <label class="col-sm-4 control-label">Verification Type</label>
+        <div class="col-sm-8">
+            <label class="radio-inline">
+                <input ng-model="StarPoints.VerificationType" ng-value="VerificationTypes.Mobile" type="radio" ng-change="StPointVerTypeChanged()" />
+                Pin Based (Mobile)
+            </label>
+            <label class="radio-inline">
+                <input ng-model="StarPoints.VerificationType" ng-value="VerificationTypes.NIC" type="radio" ng-change="StPointVerTypeChanged()" />
+                Question Based (NIC)
+            </label>
+        </div>
+    </div>
+
+    <fieldset ng-show="StarPoints.VerificationType == VerificationTypes.Mobile">
+        <div class="form-group" ng-class="">
+            <label class="control-label col-sm-4">PIN</label>
+            <div class="col-sm-8">
+                <input type="text" class="k-input k-textbox k-fill" ng-model="StarPoints.Mobile.NfcPin" />
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset ng-show="StarPoints.VerificationType == VerificationTypes.NIC">
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Question</label>
+            <div class="col-sm-8">
+                <textarea class="k-input k-textbox k-fill" row="2" ng-model="StarPoints.NIC.Question" ng-readonly="true"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Answer</label>
+            <div class="col-sm-8">
+                <input type="text" class="k-input k-textbox k-fill" name="starPointsAns" ng-change="checkFilled();" ng-model="StarPoints.NIC.Answer" />
+            </div>
+        </div>
+    </fieldset>
+
+    <div class="form-group" ng-class="">
+        <div class="col-sm-8 col-sm-offset-4">
+            <button type="button" class="btn btn-success" ng-click="SaveStarPoints()" ng-disabled="!(StarPoints.Mobile.NfcPin || StarPoints.NIC.Answer) || !StarPoints.RefCode">Submit</button>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-condensed table-hover">
+            <tr>
+                <th width="50%">Request Date & Time</th>
+                <td><span ng-bind="StarPoints.Request.DateTime"></span></td>
+            </tr>
+            <tr>
+                <th>Request Reference</th>
+                <td><span ng-bind="StarPoints.Request.StpReference"></span></td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td><span ng-bind="StarPoints.Request.Status"></span></td>
+            </tr>
+            <tr>
+                <th>Approval Code</th>
+                <td><span ng-bind="StarPoints.Request.Approval.StpCode"></span></td>
+            </tr>
+            <tr>
+                <th>Approved Date & Time</th>
+                <td><span ng-bind="StarPoints.Request.Approval.DateTime"></span></td>
+            </tr>
+            <tr>
+                <th>Remarks</th>
+                <td><span ng-bind="StarPoints.Request.Remarks"></span></td>
+            </tr>
+        </table>
+    </div>
+
+</div>

@@ -1,0 +1,327 @@
+﻿<h1 ng-bind="Title()"></h1>
+
+<div class="container">
+
+    <message ng-model="alertMessage"  ng-hide="true"></message>
+
+
+
+    <div class="widget">
+        <div class="widget-body">
+
+            <form class="form-horizontal" novalidate>
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <div ng-class="" class="form-group">
+                            <label class="col-sm-5 control-label text-right">Transfer Batch ID</label>
+                            <div class="col-sm-7">
+
+                                <div class="input-group">
+                                    <input type="text" ng-model="payTrans.BathId" class="k-input k-textbox k-fill" ng-change="GetTransferBatchDetails()" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button" ng-click="PaymentTransferID.open()" tooltip title="{{label.search}}"><i class="icon icon_search"></i></button>
+                                    </span>
+                                </div>
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+
+                                    </p>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                        <div ng-class="" class="form-group">
+                            <label class="col-sm-5 control-label text-right">New Payment - Product Cat.</label>
+                            <div class="col-sm-7">
+
+                                <select kendo-drop-down-list class="k-fill"
+                                        k-data-text-field="'Description'"
+                                        k-data-value-field="'Id'" ng-disabled="prodCatDrop"
+                                        k-data-source="ProductCatCollection"
+                                        ng-model="payTrans.ProdCat"></select>
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+
+                                    </p>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label text-right">Transfer Reason Code</label>
+                            <div class="col-sm-7">
+
+                                <select kendo-drop-down-list class="k-fill"
+                                        ng-change="SetTransferReasonId()" name="cancelCode"
+                                        k-data-text-field="'Description'"
+                                        k-data-value-field="'Id'"
+                                        k-data-source="cancellattonCode"
+                                        ng-model="payTrans.cancelCode"
+                                        ng-disabled="payTrans.BathId"></select>
+
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label text-right">Transfer Reason Description</label>
+                            <div class="col-sm-7">
+
+                                <select kendo-drop-down-list class="k-fill"
+                                        k-placeholder="'Select '" ng-change="SetTransferReasonDesc()"
+                                        k-data-text-field="'Description'"
+                                        k-data-value-field="'Id'"
+                                        k-data-source="CancellationDesc"
+                                        ng-model="payTrans.CancelDesc"
+                                        ng-disabled="payTrans.BathId"></select>
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label text-right">Mistake Done By</label>
+                            <div class="col-sm-7">
+
+                                <select kendo-drop-down-list
+                                        required
+                                        class="k-fill"
+                                        k-data-text-field="'text'"
+                                        k-data-value-field="'value'"
+                                        k-data-source="OptionsMistakeDoneBy"
+                                        ng-model="payTrans.MistakeDoneBy"
+                                        ng-disabled="payTrans.BathId"></select>
+
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--<div class="form-group">
+                            <label class="col-sm-5 control-label text-right">Transfer Within</label>
+                            <div class="col-sm-7">
+
+                                <select kendo-drop-down-list
+                                        required
+                                        class="k-fill"
+                                        k-data-text-field="'text'"
+                                        k-data-value-field="'value'"
+                                        k-data-source="OptionsTransferWithin"></select>
+
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>-->
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label text-right">Customer Contact Details</label>
+                            <div class="col-sm-7">
+
+                                <input type="text" ng-model="payTrans.custContactDetails" class="k-fill k-textbox" ng-disabled="payTrans.BathId" />
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label text-right">Transfer Remarks</label>
+                            <div class="col-sm-7">
+
+                                <textarea ng-model="payTrans.remarks" class="k-fill k-textbox"></textarea>
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="well well-md">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label class="checkbox"><input type="checkbox" ng-model="payTrans.originalReceipt" />Original Receipt</label>
+                                    <label class="checkbox"><input type="checkbox" ng-model="payTrans.PayTransForm" />Payment Transfer Form</label>
+                                    <label class="checkbox"><input type="checkbox" ng-model="payTrans.Email" />Email</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="checkbox"><input type="checkbox" ng-model="payTrans.NicCopy" />NIC Copy</label>
+                                    <label class="checkbox"><input type="checkbox" ng-model="payTrans.ReqLetter" />Customer Request Letter</label>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <label class="col-sm-5 control-label">Reference <span class="label label-success" ng-model="IsAttach" ng-bind="IsAttach" ng-class="{'YES':'label-success', 'NO':'label-default'}[IsAttach]"></span></label>
+                                <div class="col-sm-7">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-primary btn-sm" ng-disabled="IsAttach=='NO'" data-toggle="modal" data-target="#ReferenceViewRemoveAttachments">View / Remove</button>
+                                        <button type="button" class="btn btn-primary  btn-sm" data-toggle="modal" data-target="#ReferenceAddAttachments">Add</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="col-md-6">
+
+
+                        <table class="table table-bordered  table-condensed  table-hover">
+
+                            <tbody>
+                                <tr><td width="60%">Batch Date &amp; Time</td><td ng-bind="payTrans.BatchDate" class="ng-binding  text-right"></td></tr>
+                                <tr><td width="60%">Workflow Status</td><td ng-bind="payTrans.workflow" class="ng-binding  text-right"></td></tr>
+                                <tr><td width="60%">Workflow Code</td><td ng-bind="payTrans.workflowCodes" class="ng-binding  text-right"></td></tr>
+                                <tr><td width="60%">App/Reject Reason</td><td ng-bind="payTrans.RejectReason" class="ng-binding  text-right"></td></tr>
+                                <tr><td width="60%">Payment Type</td><td ng-bind="payTrans.PaymentType" class="ng-binding  text-right"></td></tr>
+                                <tr><td>Payment Source</td><td ng-bind="payTrans.PaymentSource" class="ng-binding  text-right"></td></tr>
+                                <tr><td>Payment Method</td> <td ng-bind="payTrans.PayMethod" class="ng-binding  text-right"></td></tr>
+                                <tr><td>Payment Mode</td><td ng-bind="payTrans.PaymentModeNew" class="ng-binding  text-right"></td></tr>
+                                <tr><td>Transferred To</td><td ng-bind="payTrans.TransferTo" class="ng-binding  text-right"></td></tr>
+                            </tbody>
+                        </table>
+
+
+
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading"><b>Cancelling Receipt Details</b></div>
+
+
+
+                            <table class="table table-bordered table-condensed  table-hover">
+
+                                <tbody>
+                                    <tr><td width="60%">Receipt No</td><td ng-bind="payTrans.ReceiptNumber" class="ng-binding  text-left"></td></tr>
+                                    <tr><td width="60%">Reference No</td><td ng-bind="payTrans.ReferenceNo" class="ng-binding  text-left"></td></tr>
+                                    <tr><td width="60%">Receipt Date</td><td ng-bind="payTrans.ReceiptDate" class="ng-binding  text-left"></td></tr>
+
+                                    <tr><td>BU</td><td ng-bind="payTrans.SBU" class="ng-binding  text-left"></td></tr>
+                                    <tr><td>Connection Reference</td><td ng-bind="payTrans.ConnectionReference" class="ng-binding  text-left"></td></tr>
+                                    <tr><td>Contract No</td><td ng-bind="payTrans.ContractNo" class="ng-binding  text-left"></td></tr>
+                                    <tr><td>Amount</td>
+                                        <td class="ng-binding">{{payTrans.Amount | number:2}}</td>
+                                    </tr>
+
+                                    <tr><td>Payment Method</td> <td ng-bind="payTrans.PaymentMethod" class="ng-binding  text-left"></td></tr>
+                                    <tr><td>Payment Mode</td><td ng-bind="payTrans.PaymentMode" class="ng-binding  text-left"></td></tr>
+                                    <tr><td>Payment Source</td><td ng-bind="payTrans.PaymentSource" class="ng-binding  text-left"></td></tr>
+                                    <tr><td>Receipt Generated User</td><td ng-bind ="payTrans.user" class="ng-binding  text-left"></td></tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+
+
+
+
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Correct Entry Details</h5>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="pull-right">
+                            <button class="btn btn-warning" type="button" ng-disabled="validateBtn" ng-click="CreateCRMObjectToValidateBulk()">Validate</button>                                    <br /><br />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="dgGridTransCorrectEntryDetails1" tabindex="0"
+                             kendo-grid="dgGridTransCorrectEntryDetails1"
+                             ng-init="Init1('dgGridTransCorrectEntryDetails1')"
+                             k-options="dgGridTransCorrectEntryDetails.options()">
+                        </div>
+
+                    </div>
+
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-7"></div>
+                    <div class="col-md-5 pull-right">
+
+                        <div ng-class="" class="form-group">
+                            <label class="col-sm-7 control-label">Total Amount</label>
+                            <div class="col-sm-5">
+
+                                <input type="text" class="k-input k-textbox k-fill" ng-model="payTrans.total" name="total" readonly="readonly">
+
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div> 
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-12">
+                        <button  permission-code="'50105'" class="btn btn-primary" ng-click="SubmitPaymentTransfer()" type="button" ng-disabled="SaveBtn">Save</button>
+                        <!--<button class="btn btn-primary" ng-click="SubmitPaymentTransfer()" type="button">Send Request</button>-->
+                    </div>
+                </div>
+
+            </form>
+
+                </div>
+            </div>
+
+
+        </div>
+
+
+<reference options="referenceParams" callback="referenceCallback"></reference>
+
+<div class="modal hide" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-header">
+        <h1>Please Wait</h1>
+    </div>
+    <div class="modal-body">
+        <div id="ajax_loader">
+            <img src="~/Images/ajax-loader.gif" style="display: block; margin-left: auto; margin-right: auto;">
+        </div>
+    </div>
+</div>
+<finder-new id="PaymentTransferID"
+            title="{{PaymentTransferID.title}}"
+            params="PaymentTransferID.params"
+            info="PaymentTransferID.info"
+            callback="PaymentTransferID.callback"></finder-new>

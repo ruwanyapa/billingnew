@@ -1,0 +1,54 @@
+﻿
+<h1 ng-bind="Title()"></h1>
+
+<div class="container">
+    <message ng-model="alertMessage"></message>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="widget">
+                <div class="widget-body">
+
+                    <form class="form-horizontal" novalidate>
+
+                        <div ng-class="" class="form-group">
+                            <label class="col-sm-5 control-label">Payment Type</label>
+                            <div class="col-sm-7">
+                                <div class="input-group">
+                                    <input type="text" name="Description" ng-model="PaymentType.Description" class="k-input k-textbox k-fill ng-pristine ng-valid">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button" ng-click="finderPaymentType.open()" tooltip title=" {{label.search}}"><i class="icon icon_search"></i></button>
+                                        <button class="btn btn-default" type="button" ng-click="changePageState('NEW')" tooltip title="{{label.create}}"><i class="icon icon_plus"></i></button>
+                                    </span>
+                                </div>
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group margin-bottom-0 ng-isolate-scope">
+                            <div class="col-sm-7 col-sm-offset-5">
+                                <label class="checkbox">
+                                    <input type="checkbox" name="status" ng-model="PaymentType.InActive" class="ng-pristine ng-valid"> Inactive
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+            <div>
+                <button class="btn btn-success" ng-click="PostPaymentTypes()" type="button">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<finder-new id="finderPaymentType"
+            title="{{finderPaymentType.title}}"
+            params="finderPaymentType.params"
+            info="finderPaymentType.info"
+            callback="finderPaymentType.callback"></finder-new>

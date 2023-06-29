@@ -1,0 +1,100 @@
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <style>
+        .k-grid-content {
+            max-height: 150px;
+        }
+    </style>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">{{title}}</h4>
+
+
+            </div>
+            <div class="modal-body">
+                <table border="0" width="100%" class="table table-filter">
+                    <tr ng-repeat="i in searchCount" style="border:none;" ng-hide="rowHide(i);">
+                        <td>
+                            <input type="checkbox" ng-model="finder[i]['selected']" ng-disabled="i==0" style="margin-top: 5px" />
+                        </td>
+                        <td>
+                            <select kendo-drop-down-list
+                                    ng-hide="i==0"
+                                    class="k-fill"
+                                    ng-model="finder[i]['Operator']"
+                                    ng-disabled="!finder[i]['selected']"
+                                    k-data-text-field="'text'"
+                                    k-data-value-field="'value'"
+                                    k-data-source="operator"></select>
+                            <label ng-show="i==0">Where</label>
+                        </td>
+                        <td>
+                            <select kendo-drop-down-list
+                                    class="k-fill"
+                                    ng-model="finder[i]['ColumnName']"
+                                    ng-disabled="!finder[i]['selected']"
+                                    ng-change="setSearchOptions(i);"
+                                    k-data-text-field="'FieldHeaderText'"
+                                    k-data-value-field="'FieldName'"
+                                    k-data-source="finderFields"></select>
+                            <input type="hidden" ng-model="finder[i]['FieldType']" />
+                        </td>
+                        <td ng-if="finder[i]['FieldType']==='Boolean'"><label style="padding-left:15px; padding-top:5px;">Equals</label></td>
+
+                        <td ng-if="finder[i]['FieldType']!='Boolean'">
+
+                            <select kendo-drop-down-list
+                                    class="k-fill"
+                                    ng-model="finder[i]['OperatorType']"
+                                    ng-disabled="!finder[i]['selected']"
+                                    k-data-text-field="'type_name'"
+                                    k-data-value-field="'type_name'"
+                                    k-data-source="typesDropDown[i]"></select>
+                        </td>
+                        <td colspan="{{{'true':'1', 'false':'2'}[finder[i]['OperatorType']=='Between']}}">
+
+                            <!--
+                                ** When Field type is Boolean, Key value field will be a hidden field
+                                ** at the same time, Boolean switch will be enable.
+                            -->
+                            <input ng-model="finder[i]['KeyValue']"
+                                   ng-disabled="!finder[i]['selected']"
+                                   type="{{{'true':'hidden', 'false':'text'}[finder[i]['FieldType']=='Boolean']}}"
+                                   class="k-input k-textbox k-fill"
+                                   ng-class="{'true':'focus-here'}[$first]" />
+                            <fieldset ng-if="finder[i]['FieldType']==='Boolean'" class="clearfix finder-boolean">
+                                <label class="switch">
+                                    <input ng-model="finder[i]['Boolean']"
+                                           ng-change="finder[i]['KeyValue']=finder[i]['Boolean']"
+                                           ng-init="finder[i]['KeyValue']=finder[i]['Boolean']"
+                                           type="checkbox"><span></span>
+                                </label>
+                                <span class="badge">{{finder[i]['KeyValue']}}</span>
+                            </fieldset>
+                            
+
+                        </td>
+                        <td ng-show="finder[i]['OperatorType']=='Between'">
+                            <input ng-model="finder[i]['KeyValue2']" ng-disabled="!finder[i]['selected']" type="text" class="k-input k-textbox k-fill" />
+                        </td>
+                    </tr>
+                </table>
+
+                <div class="clearfix" style="margin-bottom: 7px;">
+                    <button class="btn btn-sm btn-default" type="button" ng-click="rowHidden=!rowHidden" ng-bind="{'true':'Expand Search Fields','false':'Collapse Search Fields'}[rowHidden]"></button>
+                    <button type="button" ng-click="finderForm()" class="btn btn-info btn-sm pull-right">Search</button>
+                </div>
+
+                <div class="table-responsive">
+                    <div id="{{gridId_}}"></div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="updateModel()">Select</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

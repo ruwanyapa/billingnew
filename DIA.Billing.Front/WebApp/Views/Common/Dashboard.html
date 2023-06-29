@@ -1,0 +1,328 @@
+<!--<i class="icon icon_lightbulb_alt" style="font-size: 240px; margin: 100px auto; display: block; text-align: center; color:#CB5EE2;"></i>-->
+<style>
+    .anim {
+        padding-top: 120px;
+        max-height: 500px;
+        /*overflow: hidden;*/
+        position: relative;
+        /*min-width: 100%;*/
+    }
+    .triangle {
+        position: relative;
+        top: 40%;
+        margin: 0 auto;
+        width: 36px;
+    }
+    .triangle div {
+        height: 0;
+        width: 0;
+        position: relative;
+    }
+    .triangle div:before, .triangle div:after {
+        content: "";
+        display: block;
+        position: absolute;
+    }
+    .triangle div:first-child {
+        border-left: 36px #b5274a solid;
+        border-top: 18px solid transparent;
+        border-bottom: 18px solid transparent;
+    }
+    .triangle div:first-child:before {
+        border-right: 36px #ee3880 solid;
+        border-top: 18px solid transparent;
+        border-bottom: 18px solid transparent;
+        left: -72px;
+        top: -18px;
+    }
+    .triangle div:first-child:after {
+        border-right: 36px #ba36b8 solid;
+        border-top: 18px solid transparent;
+        border-bottom: 18px solid transparent;
+        left: -36px;
+        top: -36px;
+    }
+    .triangle div:last-child {
+        border-left: 36px #f7931d solid;
+        border-top: 18px solid transparent;
+        border-bottom: 18px solid transparent;
+        margin-top: -72px;
+        margin-left: -24px;
+        -webkit-transform: rotate(65deg);
+        -moz-transform: rotate(65deg);
+        transform: rotate(65deg);
+    }
+    .triangle div:last-child:before {
+        border-right: 36px #ee5923 solid;
+        border-top: 18px solid transparent;
+        border-bottom: 18px solid transparent;
+        left: -72px;
+        top: -18px;
+    }
+    .triangle div:last-child:after {
+        border-right: 36px #ffc000 solid;
+        border-top: 18px solid transparent;
+        border-bottom: 18px solid transparent;
+        left: -36px;
+        top: -36px;
+    }
+    .anim .triangle div:first-child {
+        -webkit-animation: f 1.2s alternate ease-in;
+        -moz-animation: f 1.2s alternate ease-in;
+        animation: f 1.2s alternate ease-in;
+    }
+    .anim .triangle div:first-child:before {
+        -webkit-animation: fb 1.2s alternate ease-in;
+        -moz-animation: fb 1.2s alternate ease-in;
+        animation: fb 1.2s alternate ease-in;
+    }
+    .anim .triangle div:first-child:after {
+        -webkit-animation: fa 1.2s alternate ease-in;
+        -moz-animation: fa 1.2s alternate ease-in;
+        animation: fa 1.2s alternate ease-in;
+    }
+    .anim .triangle div:last-child {
+        -webkit-animation: l 1s alternate ease-out;
+        -moz-animation: l 1s alternate ease-out;
+        animation: l 1s alternate ease-out;
+    }
+    .anim .triangle div:last-child:before {
+        -webkit-animation: lb 1s alternate ease-out;
+        -moz-animation: lb 1s alternate ease-out;
+        animation: lb 1s alternate ease-out;
+    }
+    .anim .triangle div:last-child:after {
+        -webkit-animation: la 1s alternate ease-out;
+        -moz-animation: la 1s alternate ease-out;
+        animation: la 1s alternate ease-out;
+    }
+
+    .dialog {
+        text-align: center;
+        position: relative;
+        margin-top: 50px;
+        font-family: 'Roboto Condensed', sans-serif;
+        font-size: 25px;
+        text-shadow: 1px 2px 0 rgba(0, 0, 0, 0.2);
+        color: #555;
+        padding-right: 72px;
+    }
+    .anim .dialog {
+        -webkit-animation: d 1.5s normal ease-out;
+        -moz-animation: d 1.5s normal ease-out;
+        animation: d 1.5s normal ease-out;
+    }
+
+    .help {
+        position: fixed;
+        top: 25px;
+        right: 25px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: rgba(255, 255, 255, 0.8);
+        border-radius: 5px;
+        padding: 8px 15px;
+        font-family: 'Roboto Condensed', sans-serif;
+        font-size: 14px;
+        text-transform: uppercase;
+        cursor: pointer;
+    }
+
+    @-webkit-keyframes d {
+        0%, 90% {
+            opacity: 0;
+            margin-top: 30px;
+        }
+    }
+    @-moz-keyframes d {
+        0%, 90% {
+            opacity: 0;
+            margin-top: 30px;
+        }
+    }
+    @-o-keyframes d {
+        0%, 90% {
+            opacity: 0;
+            margin-top: 30px;
+        }
+    }
+    @keyframes d {
+        0%, 90% {
+            opacity: 0;
+            margin-top: 30px;
+        }
+    }
+    @-webkit-keyframes l {
+        0%, 30% {
+            opacity: 0;
+            -webkit-transform: rotate(30deg) scale(8);
+            margin-right: -54px;
+        }
+    }
+    @-moz-keyframes l {
+        0%, 30% {
+            opacity: 0;
+            -webkit-transform: rotate(30deg) scale(8);
+            margin-right: -54px;
+        }
+    }
+    @-o-keyframes l {
+        0%, 30% {
+            opacity: 0;
+            -webkit-transform: rotate(30deg) scale(8);
+            margin-right: -54px;
+        }
+    }
+    @keyframes l {
+        0%, 30% {
+            opacity: 0;
+            -webkit-transform: rotate(30deg) scale(8);
+            margin-right: -54px;
+        }
+    }
+    @-webkit-keyframes lb {
+        0%, 20% {
+            opacity: 0;
+            -webkit-transform: rotate(-165deg) scale(12);
+            margin-right: -720px;
+        }
+    }
+    @-moz-keyframes lb {
+        0%, 20% {
+            opacity: 0;
+            -webkit-transform: rotate(-165deg) scale(12);
+            margin-right: -720px;
+        }
+    }
+    @-o-keyframes lb {
+        0%, 20% {
+            opacity: 0;
+            -webkit-transform: rotate(-165deg) scale(12);
+            margin-right: -720px;
+        }
+    }
+    @keyframes lb {
+        0%, 20% {
+            opacity: 0;
+            -webkit-transform: rotate(-165deg) scale(12);
+            margin-right: -720px;
+        }
+    }
+    @-webkit-keyframes la {
+        0%, 10% {
+            opacity: 0;
+            -webkit-transform: rotate(-165deg) scale(16);
+            margin-left: 720px;
+        }
+    }
+    @-moz-keyframes la {
+        0%, 10% {
+            opacity: 0;
+            -webkit-transform: rotate(-165deg) scale(16);
+            margin-left: 720px;
+        }
+    }
+    @-o-keyframes la {
+        0%, 10% {
+            opacity: 0;
+            -webkit-transform: rotate(-165deg) scale(16);
+            margin-left: 720px;
+        }
+    }
+    @keyframes la {
+        0%, 10% {
+            opacity: 0;
+            -webkit-transform: rotate(-165deg) scale(16);
+            margin-left: 720px;
+        }
+    }
+    @-webkit-keyframes f {
+        0% {
+            opacity: .5;
+            -webkit-transform: rotate(265deg) scale(6);
+        }
+    }
+    @-moz-keyframes f {
+        0% {
+            opacity: .5;
+            -webkit-transform: rotate(265deg) scale(6);
+        }
+    }
+    @-o-keyframes f {
+        0% {
+            opacity: .5;
+            -webkit-transform: rotate(265deg) scale(6);
+        }
+    }
+    @keyframes f {
+        0% {
+            opacity: .5;
+            -webkit-transform: rotate(265deg) scale(6);
+        }
+    }
+    @-webkit-keyframes fb {
+        0%, 10% {
+            opacity: .5;
+            -webkit-transform: rotate(65deg) scale(8);
+            margin-left: -360px;
+        }
+    }
+    @-moz-keyframes fb {
+        0%, 10% {
+            opacity: .5;
+            -webkit-transform: rotate(65deg) scale(8);
+            margin-left: -360px;
+        }
+    }
+    @-o-keyframes fb {
+        0%, 10% {
+            opacity: .5;
+            -webkit-transform: rotate(65deg) scale(8);
+            margin-left: -360px;
+        }
+    }
+    @keyframes fb {
+        0%, 10% {
+            opacity: .5;
+            -webkit-transform: rotate(65deg) scale(8);
+            margin-left: -360px;
+        }
+    }
+    @-webkit-keyframes fa {
+        0%, 20% {
+            opacity: .5;
+            -webkit-transform: rotate(165deg) scale(10);
+            margin-left: 360px;
+        }
+    }
+    @-moz-keyframes fa {
+        0%, 20% {
+            opacity: .5;
+            -webkit-transform: rotate(165deg) scale(10);
+            margin-left: 360px;
+        }
+    }
+    @-o-keyframes fa {
+        0%, 20% {
+            opacity: .5;
+            -webkit-transform: rotate(165deg) scale(10);
+            margin-left: 360px;
+        }
+    }
+    @keyframes fa {
+        0%, 20% {
+            opacity: .5;
+            -webkit-transform: rotate(165deg) scale(10);
+            margin-left: 360px;
+        }
+    }
+
+</style>
+
+
+<div class="body anim" id="body">
+    <div class="triangle anim">
+        <div></div>
+        <div></div>
+    </div>
+<div class="dialog">CPOS-Billing</div>
+</div>

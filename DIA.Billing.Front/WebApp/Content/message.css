@@ -1,0 +1,38 @@
+﻿/*
+<div class="message message-****">
+    <strong>Warning!</strong> I’m about to lose my cool.
+    <div class="message-close">×</div>
+</div>
+*/
+.message {
+    border-radius:2px;
+    color: #fff;
+    background-color:#adadad;
+    margin-bottom: 10px;
+    padding: 10px 16px;
+    position: relative;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.25);
+}
+
+.message-close {
+    background: rgba(0,0,0,0.1);
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    height: 20px;
+    line-height: 20px;
+    position: absolute;
+    right: 11px;
+    text-align: center;
+    top: 9px;
+    width: 20px;
+}
+
+.message-close:hover {background: rgba(0,0,0,0.3);}
+
+.message-error {background-color:#c9302c;}
+.message-success {background-color:#449d44;}
+.message-warning {background-color:#ec971f;}
+.message-info {background-color:#428bca;}

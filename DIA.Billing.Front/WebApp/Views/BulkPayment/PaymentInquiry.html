@@ -1,0 +1,267 @@
+﻿<h1 ng-bind="Title()"></h1>
+
+<div class="container">
+
+    <message ng-model="alertMessage"  ng-hide="true"></message>
+  
+            <div class="widget">
+                <div class="widget-body">
+
+       <form class="form-horizontal" novalidate>
+
+                        <div class="row">
+                            <div class="col-md-6">
+
+
+                                <div ng-class="" class="form-group">
+                                    <label class="col-sm-5 control-label">Product Category</label>
+                                    <div class="col-sm-7">
+                                        <select kendo-drop-down-list class="k-fill"
+                                                k-data-text-field="'Description'"
+                                                k-data-value-field="'Id'"
+                                                k-data-source="ProductCatCollection"
+                                                ng-model="payInquery.ProdCat"></select>
+
+
+                                        <div ng-show="" class="ng-hide">
+                                            <p ng-show="" class="help-block ng-hide">
+
+                                            </p>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <div ng-class="" class="form-group">
+                                    <label class="col-sm-5 control-label">Receipt No</label>
+                                    <div class="col-sm-7">
+
+                                        <input type="text" ng-model="payInquery.receiptNo" class="k-input k-textbox k-fill">
+
+                                        <div ng-show=" " class=" ng-hide">
+                                            <p ng-show="" class="help-block ng-hide">
+
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" ng-class="{ 'has-error' : hasError(FormPaymentInquiry.fromDate) || hasError(FormPaymentInquiry.toDate)}">
+                                    <label class="col-sm-5 control-label">Receipt Date</label>
+                                    <div class="col-sm-7">
+                                        <div class="input-group">
+                                            <input type="text" class="k-fill" id="fromDate" ng-model="payInquery.fromDate" name="fromDate" placeholder="From" required />
+                                            <span class="input-group-btn"> - </span>
+                                            <input type="text" class="k-fill" id="toDate" ng-model="payInquery.toDate" name="toDate" placeholder="To" required />
+                                        </div>
+
+                                        <div ng-init="InitDatePickers('fromDate', 'toDate');"></div>
+
+                                        <div ng-show="hasError(FormPaymentInquiry.fromDate) || hasError(FormPaymentInquiry.toDate)">
+                                            <p class="help-block" ng-show="hasError(FormPaymentInquiry.fromDate, ErrorTypes.Required) || hasError(FormPaymentInquiry.toDate, ErrorTypes.Required)">Date range is required</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div ng-class="" class="form-group">
+                                    <label class="col-sm-5 control-label">Payment Method</label>
+                                    <div class="col-sm-7">
+
+                                        <select kendo-drop-down-list class="k-fill"
+                                                k-placeholder="'Select '"
+                                                k-data-text-field="'Description'"
+                                                k-data-value-field="'Id'"
+                                                ng-model="payInquery.PaymentMethod"
+                                                k-data-source="PaymentMethodCollection"></select>
+
+                                        <div ng-show="" class="ng-hide">
+                                            <p ng-show="" class="help-block ng-hide">
+
+                                            </p>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+
+                            <div class="col-md-6">
+
+
+                                <div class="form-group">
+                                    <label class="col-sm-5 control-label">Contract No</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" ng-model="payInquery.contactNo" class="k-input k-textbox k-fill">
+
+                                        <div ng-show="" class="ng-hide">
+                                            <p ng-show="" class="help-block ng-hide">
+
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div ng-class="" class="form-group">
+                                    <label class="col-sm-5 control-label">Payment Type</label>
+                                    <div class="col-sm-7">
+
+                                        <select kendo-drop-down-list class="k-fill"
+                                                k-placeholder="'Select '"
+                                                k-data-text-field="'Description'"
+                                                k-data-value-field="'Id'"
+                                                ng-model="payInquery.PaymentType"
+                                                k-data-source="PaymentTypeCollection" ng-change="LoadPaymentSourseByPaymentType()"></select>
+                                        <div ng-show="" class="ng-hide">
+                                            <p ng-show="" class="help-block ng-hide">
+
+                                            </p>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+
+
+                                <div ng-class="" class="form-group">
+                                    <label class="col-sm-5 control-label">Payment Source</label>
+                                    <div class="col-sm-7">
+
+                                        <select kendo-drop-down-list class="k-fill"
+                                                k-placeholder="'Select '"
+                                                k-data-text-field="'Description'"
+                                                k-data-value-field="'Id'"
+                                                k-data-source="PaymentSourceCollection"
+                                                ng-model="payInquery.PaymentSource"></select>
+                                        <div ng-show="" class="ng-hide">
+                                            <p ng-show="" class="help-block ng-hide">
+
+                                            </p>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-5 control-label">Receipt User</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" ng-model="payInquery.user" class="k-input k-textbox k-fill">
+
+                                        <div ng-show="" class="ng-hide">
+                                            <p ng-show="" class="help-block ng-hide">
+
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                             
+
+                                <div class="form-group">
+                                    <label class="col-sm-5 control-label">Cheque No</label>
+                                    <div class="col-sm-7">
+                                        <div class="input-group">
+                                            <input type="text" class="k-input k-textbox k-fill" ng-model="payInquery.chequeNo" placeholder="Cheque No">
+                                            <span class="input-group-btn"> - </span>
+                                            <input type="text" class="k-input k-textbox k-fill" ng-model="payInquery.bankCode" placeholder="Bank Code">
+                                            <span class="input-group-btn"> - </span>
+                                            <input type="text" class="k-input k-textbox k-fill" ng-model="payInquery.branchCode" placeholder="BranchCode">
+
+                                        </div>
+
+                                        <div ng-show="" class="ng-hide">
+                                            <p ng-show="" class="help-block ng-hide">
+
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+
+                        <br />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class=" pull-right">
+                                    <button  permission-code="'50201'" class="btn btn-warning btn-sm" type="button" ng-click="BulkCanCellation()" ng-disabled="false">Bulk Cancellation</button>
+                                    <button type="button" class="btn btn-primary btn-sm" ng-click="SearchInBillingSys()" ng-disabled="false">Search In Billing System</button>
+
+                                    <br /><br />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <div id="dgGridBillingSystem1" tabindex="0"
+                                     kendo-grid="dgGridBillingSystem1"
+                                     ng-init="Init1('dgGridBillingSystem1')"
+                                     k-options="dgGridBillingSystem.options()">
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <br /><br />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class=" pull-right">
+                                    <button class="btn btn-info btn-sm" type="button" ng-click="SearchInPE()" ng-disabled="false">Search In PE</button>
+                                    <br /><br />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="dgGridPESearch1" tabindex="0"
+                                     kendo-grid="dgGridPESearch1"
+                                     ng-init="Init2('dgGridPESearch1')"
+                                     k-options="dgGridPESearch.options()">
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <br /><br />
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class=" pull-right">
+                                    <button class="btn btn-primary btn-sm" ng-click="SearchInCpos()" type="button" ng-disabled="false">Search In CPOS</button>
+                                    <br /><br />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="dgGridCPOSSearch1" tabindex="0"
+                                     kendo-grid="dgGridCPOSSearch1"
+                                     ng-init="Init3('dgGridCPOSSearch1')"
+                                     k-options="dgGridCPOSSearch.options()">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+</form>
+
+</div>
+
+
+                        </div>
+                    </div>
+
+
+<!--<finder-new id="PaymentInquiryID"></finder-new>-->

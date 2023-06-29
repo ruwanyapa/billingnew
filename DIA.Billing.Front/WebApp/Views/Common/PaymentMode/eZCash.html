@@ -1,0 +1,88 @@
+<div>
+    <message ng-model="payAlertMessage" ng-hide ="true"></message>
+     
+    <div class="form-group" ng-class="">
+        <label class="col-sm-4 control-label">Account type</label> 
+        <div class="col-sm-8">
+            <label class="radio-inline">
+                <input ng-model="EzCash.AccountType" value="1" type="radio" ng-change="EzAccTypeChnage()" />
+                Phone number </label>
+            <label class="radio-inline" style="display:none">
+                <input ng-model="EzCash.AccountType" value="2" type="radio" ng-change="EzAccTypeChnage()" />
+                Diffrent </label>
+            <label class="radio-inline">
+                <input ng-model="EzCash.AccountType" value="3" type="radio" ng-change="EzAccTypeChnage()" />
+                NFC Code </label>
+        </div>
+    </div>
+
+    <fieldset ng-disabled="!EzCash.NfcVerified">
+        <div class="form-group" ng-class="">
+            <label class="col-sm-4 control-label">Account Ref.</label>
+            <div class="col-sm-8">
+                <div class="input-group">
+                    <input type="text" class="k-input k-textbox k-fill" ng-model="EzCash.EzcAccountCode" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="button" ng-click="EzCashVerifyStatus()" ng-disabled="!EzCash.EzcAccountCode">Verify Status</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+
+    <fieldset ng-show="EzCash.AccountType==3">
+        <div class="form-group" ng-class="">
+            <label class="col-sm-4 control-label">NFC Account Code</label>
+            <div class="col-sm-8">
+                <div class="input-group">
+                    <input type="text" class="k-input k-textbox k-fill" ng-model="EzCash.NfcAccountCode" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="button" ng-click="EzCashRetrieveAccRef()" ng-disabled="!EzCash.NfcAccountCode">Retrieve eZCash Acc.</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <div class="form-group" ng-class="">
+        <div class="col-sm-8 col-sm-offset-4">
+            <button type="button" class="btn btn-sm btn-success" ng-click="SaveEzCash()" ng-disabled="(!EzCash.EzcVerified || !EzCash.EzcAccountCode)">Submit Redemption</button>
+            <button type="button" class="btn btn-sm btn-primary" ng-click="VerifyReedemtion()" ng-disabled="!EzCash.VerifyEzCashRedeem">Verify Redemption</button>
+        </div>
+    </div>
+    
+
+
+    <hr />
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-condensed table-hover">
+            <tr>
+                <th width="50%">Request Date & Time</th>
+                <td><span ng-bind="EzCash.Request.DateTime"></span></td>
+            </tr>
+            <tr>
+                <th>Request Reference</th>
+                <td><span ng-bind="EzCash.Request.EzcReference"></span></td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td><span ng-bind="EzCash.Request.Status"></span></td>
+            </tr>
+            <tr>
+                <th>Approval Code</th>
+                <td><span ng-bind="EzCash.Request.Approval.EzcApproveCode"></span></td>
+            </tr>
+            <tr>
+                <th>Approved Date & Time</th>
+                <td><span ng-bind="EzCash.Request.Approval.DateTime"></span></td>
+            </tr>
+            <tr>
+                <th>Remarks</th>
+                <td><span ng-bind="EzCash.Request.Remarks"></span></td>
+            </tr>
+        </table>
+    </div>
+
+</div>

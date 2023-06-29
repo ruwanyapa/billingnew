@@ -1,0 +1,69 @@
+/*
+    Optimize page gap
+*/
+
+body{
+    font-size: 12px !important;
+}
+
+/*OTHERS*/
+hr  {
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+/*FORM FIELDS*/
+input.k-textbox {
+    height:27px;
+
+}
+
+input.k-input, input.k-input {
+    background: white;
+}
+input.k-input:focus, input.k-input:hover {
+    background: #f2f2f2; /* Old browsers */
+    background: -moz-linear-gradient(top, #f2f2f2 0%, #ffffff 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f2f2f2), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #f2f2f2 0%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #f2f2f2 0%,#ffffff 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #f2f2f2 0%,#ffffff 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #f2f2f2 0%,#ffffff 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f2f2', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+}
+
+.input-group-btn .btn {
+    padding-top:4px;
+    padding-bottom:2px;
+}
+
+.form-group {
+    margin-bottom: 7px;
+}
+
+.form-horizontal .control-label, .form-horizontal .radio, .form-horizontal .checkbox, .form-horizontal .radio-inline, .form-horizontal .checkbox-inline {
+    padding-top: 5px;
+}
+
+.k-textbox>input, .k-autocomplete .k-input, .k-picker-wrap .k-input, .k-numeric-wrap .k-input, .k-dropdown-wrap .k-input, .k-selectbox .k-input {
+    height: 20px;
+}
+
+.k-picker-wrap {
+    height: 25px;
+}
+
+.k-picker-wrap .k-select {
+    margin-top: 0px;
+}
+
+.k-dropdown .k-dropdown-wrap .k-select {
+    margin-top: -2px;
+}
+
+.k-grid-header table thead tr th {font-weight: bold!important;  background-color: #eee;}
+
+.btn-sm, .btn-group-sm > .btn {
+    padding-top: 4px;
+    padding-bottom:3px;
+}

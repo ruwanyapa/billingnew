@@ -1,0 +1,63 @@
+﻿<h1 ng-bind="Title()"></h1>
+
+<div class="container">
+    <message ng-model="alertMessage"></message>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="widget">
+                <div class="widget-body">
+
+                    <form class="form-horizontal" novalidate>
+
+                        <div ng-class="" class="form-group">
+                            <label class="col-sm-5 control-label">Reason Code</label>
+                            <div class="col-sm-7">
+                                <div class="input-group">
+                                    <input type="text" name="reasonCode" ng-model="CanTransReasons.Id" class="k-input k-textbox k-fill">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button" ng-click="finderCanTransReason.open()" tooltip title=" {{label.search}}"><i class="icon icon_search"></i></button>
+                                        <button class="btn btn-default" type="button" ng-click="changePageState('NEW')" tooltip title="{{label.create}}"><i class="icon icon_plus"></i></button>
+                                    </span>
+                                </div>
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div ng-class="" class="form-group">
+                            <label class="col-sm-5 control-label">Description</label>
+                            <div class="col-sm-7">
+                                <input type="text" name="Remarks" ng-model="CanTransReasons.Description" class="k-input k-textbox k-fill ng-pristine ng-valid">
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group margin-bottom-0 ng-isolate-scope">
+                            <div class="col-sm-7 col-sm-offset-5">
+                                <label class="checkbox">
+                                    <input type="checkbox" name="status" class="ng-pristine ng-valid" ng-model="CanTransReasons.InActive"> Inactive
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+            <div>
+                <button class="btn btn-success" type="button" ng-click="PostCanTransReasons()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<finder-new id="finderCanTransReason"
+            title="{{finderCanTransReason.title}}"
+            params="finderCanTransReason.params"
+            info="finderCanTransReason.info"
+            callback="finderCanTransReason.callback"></finder-new>

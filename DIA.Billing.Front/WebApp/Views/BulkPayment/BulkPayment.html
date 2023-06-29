@@ -1,0 +1,772 @@
+﻿<h1 ng-bind="Title()"></h1>
+
+<div class="container" ng-mousemove="UpdateDateTime()">
+
+    <message ng-model="alertMessage" ng-hide="true"></message> 
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist"> 
+        <li id="ListBulkEntry" class="active"><a data-target="#BulkEntry" ng-click="" role="tab" data-toggle="tab">Postpaid Bill Payments - Bulk</a></li>
+        <li id="ListReceiptDetails"><a data-target="#ReceiptDetails" role="tab" data-toggle="tab">Receipt Details</a></li><!--ng-click="GetBatchDetails()"-->
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content widget">
+        <div class="tab-pane active" id="BulkEntry">
+            <form name="BulkEntryForm" class="form-horizontal" novalidate>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div ng-class="" class="form-group">
+                            <label class="col-sm-5 control-label">Batch ID</label>
+                            <div class="col-sm-7">
+
+                                <div class="input-group">
+                                    <input type="text" ng-blur="GetBatchDetails()"
+                                           class="k-input k-textbox k-fill" readonly="readonly" ng-model="BulkPayment.BatchId" name="BatchId">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button" ng-click="finderBulkBillingBatchID.open()" tooltip title="{{label.search}}"><i class="icon icon_search"></i></button>
+                                        <button class="btn btn-default" type="button" ng-click="CheckDataExistswhenNEw('NEW')" tooltip title="{{label.create}}"><i class="icon icon_plus"></i></button>
+                                    </span>
+                                </div>
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+
+                                    </p>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                        <div ng-class="" class="form-group">
+                            <label class="col-sm-5 control-label">Payment Type</label>
+                            <div class="col-sm-7">
+
+                                <select kendo-drop-down-list class="k-fill"
+                                        k-placeholder="'Select '" ng-disabled="PaymentTypeDrop"
+                                        k-data-text-field="'Description'"
+                                        k-data-value-field="'Id'"
+                                        ng-model="BulkPayment.PaymentType"
+                                        k-data-source="PaymentTypeCollection" ng-change="LoadPaymentSourseByPaymentType();as(1);"></select>
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+
+                                    </p>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div ng-class="" class="form-group">
+                            <label class="col-sm-5 control-label">Payment Source</label>
+                            <div class="col-sm-7">
+
+                                <select kendo-drop-down-list class="k-fill"
+                                        k-placeholder="'Select '" ng-disabled="PaymentSourceDrop"
+                                        k-data-text-field="'Description'"
+                                        k-data-value-field="'Id'"
+                                        k-data-source="PaymentSourceCollection"
+                                        ng-model="BulkPayment.PaymentSource"
+                                        ng-init="oldValue=0"
+                                        ng-change="ChangePaymentSourse();as(2);"></select>
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+
+                                    </p>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div ng-class="" class="form-group">
+                            <label class="col-sm-5 control-label">Payment Method</label>
+                            <div class="col-sm-7">
+
+                                <select kendo-drop-down-list class="k-fill"
+                                        k-placeholder="'Select '" ng-disabled="PaymentMethodDrop"
+                                        k-data-text-field="'Description'"
+                                        k-data-value-field="'Id'"
+                                        k-data-source="PaymentMethodCollection"
+                                        ng-model="BulkPayment.PaymentMethod"
+                                        ng-change="ChangePaymentMethod();as(3);"></select>
+
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+
+                                    </p>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                        <div ng-class="" class="form-group">
+                            <label class="col-sm-5 control-label">BU</label>
+                            <div class="col-sm-7">
+                                <select name="Sbu"
+                                        kendo-drop-down-list
+                                        k-placeholder="'Select SBU'"
+                                        k-data-text-field="'Description'"
+                                        k-data-value-field="'Id'"
+                                        k-data-source="SbuCollection"
+                                        ng-model="BulkPayment.Sbu"
+                                        class="k-fill" ng-disabled="PaymentBu"
+                                        ng-change="ChangeSbu();as(4)"></select>
+
+
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+
+                                    </p>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div ng-class="" class="form-group">
+                            <label class="col-sm-5 control-label">Product Category</label>
+                            <div class="col-sm-7">
+                                <select kendo-drop-down-list class="k-fill"
+                                        k-data-text-field="'Description'"
+                                        k-data-value-field="'Id'"
+                                        k-data-source="ProductCatCollection"
+                                        ng-model="BulkPayment.ProdCat" ng-disabled="PaymentProdCatDrop"
+                                        ng-change="ChangeProductCategory();as(5);"></select>
+
+
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+
+                                    </p>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="radio-group">
+
+                            <div ng-class="" class="form-group">
+                                <div class="col-sm-5 control-label">
+                                    <label class="radio-inline  pull-left">
+                                        <input type="radio" ng-change="aa()" ng-disabled="BulkPayment.AddPaymentRadioBtnIsDisabled" ng-model="BulkPayment.BillPaymentType" name="BillPaymentType" value="0" id="randomBillPay" class="ng-dirty ng-valid">
+                                        Random Bill Payment
+                                    </label>
+                                </div>
+                                <div class="col-sm-7">
+                                    <!--BulkPayment.BillPaymentType !='RandomBillPayment'-->
+                                    <button data-toggle="modal" ng-disabled="BulkPayment.AddPaymentBtnIsDisabled" class="btn btn-success btn-sm" ng-click="OpenAddPayments()" type="button">Add Payments</button>
+
+                                </div>
+                            </div>
+
+
+                            <div ng-class="" class="form-group">
+                                <div class="col-sm-5 control-label pull-left">
+                                    <label class="radio-inline  pull-left" ng-init="BulkPayment.BillPaymentType = '1' ">
+                                        <input type="radio" ng-model="BulkPayment.BillPaymentType" ng-disabled="BulkPayment.CustIdRadioBtnIsDisabled" ng-change="aa()" name="BillPaymentType" value="1" class="ng-pristine ng-valid">
+                                        Customer ID
+                                    </label>
+                                </div>
+                                <div class="col-sm-7">
+                                    <div class="input-group">
+                                        <select name="IdType"
+                                                required style="width:25%"
+                                                ng-disabled="BulkPayment.CustIdIsDisabled"
+                                                k-data-text-field="'Description'"
+                                                k-data-value-field="'Id'"
+                                                kendo-drop-down-list ng-change="CustomerIdChange()"
+                                                k-data-source="CustomerIdTypeCollection"
+                                                ng-model="BulkPayment.IdType"></select>
+                                        <input type="text" class="k-input k-textbox ng-pristine ng-valid" ng-disabled="BulkPayment.CustIdIsDisabled" ng-model="BulkPayment.OldNic" ng-keyup="$event.keyCode == 13 && GetCRMDetailsByID(1)" placeholder="{{labelNameCustomerId}}">
+                                        <input type="text" class="k-input k-textbox " style="width:82%" ng-disabled="BulkPayment.CustIdIsDisabled || BulkPayment.IdType != 'NIC'" ng-model="BulkPayment.NewNic" ng-keyup="$event.keyCode == 13 && GetCRMDetailsByID(2)" placeholder="New NIC" maxlength="12">
+
+
+
+                                        <!--<span class="input-group-btn">
+                                            <button class="btn btn-default" type="button" ng-disabled="BulkPayment.BillPaymentType !='1'" ng-click="RequetCRMDetails()">Retrieve</button>
+
+                                        </span>-->
+
+
+                                    </div>
+
+
+                                    <div ng-show="" class="ng-hide">
+
+                                        <p ng-show="" class="help-block ng-hide">
+
+                                        </p>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+                            <div ng-class="" class="form-group">
+                                <div class="col-sm-5 control-label pull-left">
+                                    <label class="radio-inline  pull-left">
+                                        <input type="radio" ng-model="BulkPayment.BillPaymentType" ng-disabled="BulkPayment.BillInvRadioBtnIsDisabled" ng-change="aa()" ng-click="focusBillInvoiceNumber()" name="BillPaymentType" value="2" class="ng-pristine ng-valid">
+                                        Bill Invoice Number
+                                    </label>
+                                </div>
+                                <div class="col-sm-7">
+                                    <div class="input-group">
+                                        <input type="text" ng-model="BulkPayment.BillInvoiceNo" id="focusBillInvoiceNumberValue" class="k-input k-textbox k-fill"
+                                               ng-keyup="$event.keyCode == 13 && AddBillInvoicePayments()" required ng-disabled="BulkPayment.BillInvIsDisabled">
+                                        <!--<span class=" input-group-btn">
+                                            <button class="btn btn-default" ng-click="RequetCRMDetails()" ng-disabled="BulkPayment.BillPaymentType !='2'" type="button">Retrieve</button>
+
+                                        </span>-->
+                                    </div>
+                                    <div ng-show="" class="ng-hide">
+                                        <p ng-show="" class="help-block ng-hide">
+
+                                        </p>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+
+                            <div ng-class="" class="form-group">
+                                <div class="col-sm-5 control-label pull-left">
+                                    <label class="radio-inline  pull-left">
+                                        <input type="radio" ng-model="BulkPayment.BillPaymentType" ng-disabled="BulkPayment.UploadRadioBtnIsDisabled" ng-change="aa()" name="BillPaymentType" value="3" class="ng-pristine ng-valid">
+                                        Bulk Upload
+                                    </label>
+                                </div>
+                                <div class="col-sm-7">
+                                    <button data-toggle="modal" ng-disabled="BulkPayment.UploadBtnIsDisabled" ng-click="OpenBulkExcelVerification()" class="btn btn-primary btn-sm" type="button">Upload</button>
+
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+
+
+
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading"><b>Batch Summary</b></div>
+
+                            <table class="table table-bordered  table-hover">
+
+                                <tbody>
+                                    <tr><th width="50%" class="control-label">No of Records</th><td ng-bind="BulkPayment.NoOfRecords" class="ng-binding  text-right"></td></tr>
+                                    <tr><th class="control-label">Total Amount</th>                     <td class="ng-binding  text-right">{{BulkPayment.TotalAmount | number:2}}</td></tr>
+                                    <tr><th class="control-label">Transfer to Suspense Count</th><td ng-bind="BulkPayment.TToSuspendcount" class="ng-binding  text-right"></td></tr>
+                                    <tr><th class="control-label">Transfer to Suspense Amount</th>      <td class="ng-binding  text-right">{{BulkPayment.TTSuspendAmount | number:2}}</td></tr>
+                                    <tr><th class="control-label">Batch Date and Time</th><td ng-bind="BulkPayment.DateTime" class="ng-binding  text-right"></td></tr>
+                                    <tr>
+                                        <th class="control-label text-right">
+                                            <div class="btn-group">
+                                                <!--<label class="col-sm-5 control-label">--> 
+                                                Reference
+                                                <span class="label label-success text-right" ng-model="IsAttach" ng-bind="IsAttach" ng-class="{'YES':'label-success', 'NO':'label-default'}[IsAttach]">
+                                                </span>
+                                                <!--</label>-->
+                                            </div>
+                                        </th>
+                                        <td class="text-right">
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" ng-disabled="IsAttach=='NO'" data-target="#ReferenceViewRemoveAttachments">View / Remove</button>
+                                                <button type="button" class="btn btn-primary  btn-sm" data-toggle="modal" ng-disabled="disabled.Attachment" data-target="#ReferenceAddAttachments">Add</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="control-label">Remarks</th>
+                                        <td>
+                                            <textarea ng-model="BulkPayment.Remarks" ng-maxlength="500" name="Remarks" ng-disabled="disabled.Remarks" class="k-input k-textbox k-fill ng-pristine ng-valid" ng-blur="InheritRemarks()" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+
+                        </div>
+
+
+                        <!--</div>
+                        <div class="col-md-6">
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading"><b>Batch Summary</b></div>
+
+                                <table class="table table-bordered  table-hover">
+
+                                    <tbody>
+                                        <tr><th width="50%" class="control-label">No of Records</th><td ng-bind="BulkPayment.NoOfRecords" class="ng-binding  text-right"></td></tr>
+                                        <tr><th class="control-label">Total Amount</th><td ng-bind="BulkPayment.TotalAmount" class="ng-binding  text-right"></td></tr>
+                                        <tr><th class="control-label">Transfer to Suspense Count</th><td ng-bind="BulkPayment.TToSuspendcount" class="ng-binding  text-right"></td></tr>
+                                        <tr><th class="control-label">Transfer to Suspense Amount</th><td ng-bind="BulkPayment.TTSuspendAmount" class="ng-binding  text-right"></td></tr>
+                                        <tr><th class="control-label">Batch Date and Time</th>      <td ng-bind="BulkPayment.DateTime" class="ng-binding  text-right"></td></tr>
+
+                                    </tbody>
+                                </table>
+
+                                <!--<div class="panel-body">
+
+                                    <div ng-class="" class="form-group">
+                                        <label class="col-sm-5 control-label">No of Records</label>
+                                        <div class="col-sm-7">
+
+                                            <input type="text" ng-model="BulkPayment.NoOfRecords" name="NoOfRecords" class="k-input k-textbox k-fill ng-pristine ng-valid" readonly="readonly">
+
+                                            <div ng-show="" class="ng-hide">
+                                                <p ng-show="" class="help-block ng-hide">
+
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div ng-class="" class="form-group">
+                                        <label class="col-sm-5 control-label">Total Amount</label>
+                                        <div class="col-sm-7">
+
+                                            <input type="text" ng-model="BulkPayment.TotalAmount" name="TotalAmount" class="k-input k-textbox k-fill ng-pristine ng-valid" readonly="readonly">
+
+                                            <div ng-show="" class="ng-hide">
+                                                <p ng-show="" class="help-block ng-hide">
+
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div ng-class="" class="form-group">
+                                        <label class="col-sm-5 control-label">Transfer to Suspense Count</label>
+                                        <div class="col-sm-7">
+
+                                            <input type="text" ng-model="BulkPayment.TToSuspendcount" name="TToSuspendcount" class="k-input k-textbox k-fill ng-pristine ng-valid" readonly="readonly">
+
+                                            <div ng-show="" class="ng-hide">
+                                                <p ng-show="" class="help-block ng-hide">
+
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div ng-class="" class="form-group">
+                                        <label class="col-sm-5 control-label">Transfer to Suspense Amount</label>
+                                        <div class="col-sm-7">
+
+                                            <input type="text" ng-model="BulkPayment.TTSuspendAmount" name="TTSuspendAmont" class="k-input k-textbox k-fill ng-pristine ng-valid" readonly="readonly">
+
+                                            <div ng-show="" class="ng-hide">
+                                                <p ng-show="" class="help-block ng-hide">
+
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div ng-class="" class="form-group">
+                                        <label class="col-sm-5 control-label">Batch Date and Time</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" ng-model="BulkPayment.DateTime" name="DateTime" class="k-input k-textbox k-fill ng-pristine ng-valid" readonly="readonly">
+                                            <div ng-show="" class="ng-hide">
+                                                <p ng-show="" class="help-block ng-hide">
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>-->
+                    </div>
+
+                </div>
+
+                <br />
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class=" pull-right">
+                            <button type="button" class="btn btn-warning btn-sm" ng-click="CreatePEObjectToValidateBulk()" tooltip title="Balance as at, Min Recon Fee, DTV Recon Fee" ng-disabled="IsRetrivedCrmDetailsBulk">
+                                Other
+                            </button>
+                            <button type="button" class="btn btn-danger btn-sm" ng-click="CreateRBMObjectToValidateBulk()" tooltip title="Total Outstanding, Last Month Bill Amount" ng-disabled="IsRetrivedCrmDetailsBulk">RBM</button>
+                            <button type="button" class="btn btn-success btn-sm" ng-click="CreateOCSObjectToValidateBulk()" tooltip title="OCS Status" ng-disabled="IsRetrivedCrmDetailsBulk">OCS</button>
+                            <button type="button" class="btn btn-info btn-sm" ng-click="CreateCRMObjectToValidateBulk()" ng-disabled="CrmRetriveBtn || IsRetrivedCrmDetails">CRM</button>
+
+                            <br /><br />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="dgBulkPayment" tabindex="0"
+                             kendo-grid="dgBulkPayment"
+                             ng-init="InitA('dgBulkPayment')"
+                             k-options="dgGridBulkPayment.options()">
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <br />
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <div ng-class="" class="form-group">
+                            <label class="col-sm-5 control-label">Total Pay Amount</label>
+                            <div class="col-sm-7">
+
+                                <input ng-model="BulkPayment.TotalPayAmount" ng-disabled="true" name="TotalPayAmount" ng-click="SetPaymentMode()" type="text" class="k-input k-textbox k-fill ng-pristine ng-valid text-right" readonly>
+
+                                <div ng-show=" " class=" ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div ng-class="" class="form-group">
+                            <label class="col-sm-5 control-label">Customer Paying Amount</label>
+                            <div class="col-sm-7">
+
+                                <input type="text" ng-model="BulkPayment.CustomerPayingAmount" ng-change="CustomerBalance()" name="CustomerPayingAmount" class="k-input k-textbox k-fill ng-pristine ng-valid text-right">
+
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-class="" class="form-group">
+                            <label class="col-sm-5 control-label">Balance</label>
+                            <div class="col-sm-7">
+
+                                <input type="text" ng-model="BulkPayment.Balance" name="Balance" class="k-input k-textbox k-fill ng-pristine ng-valid text-right" disabled="disabled">
+
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div ng-class="" class="form-group">
+
+                            <label class="col-sm-5 control-label">Payment Mode</label>
+                            <div class="col-sm-7">
+
+                                <select name=""
+                                        kendo-drop-down-list
+                                        k-placeholder="'Payment Mode'"
+                                        k-data-text-field="'Description'"
+                                        k-data-value-field="'Id'"
+                                        ng-change="SetPaymentMode()"
+                                        k-data-source="PaymentModeCollection"
+                                        ng-model="BulkPayment.PaymentMode"
+                                        class="k-fill"></select>
+                                <input type="text" ng-disabled="true" class="k-input k-textbox" style="width:200px"
+                                       name="ExistingReference" ng-model="BulkPayment.ExistingReference"
+                                       required>
+
+                                <span class="input-group-btn">
+
+                                    <button class="btn btn-default" ng-click="findExistingRef.open()" ng-disabled="receipt.PaymentMode=='-- Select --'" type="button">{{PaymentMode}}Exi.Ref.</button><!--Existing Reference data-toggle="modal" data-target="#modalExistingRef"-->
+                                </span>
+
+                                <p ng-show="" class="help-block"></p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <payment-mode options="Options"></payment-mode>
+                    </div>
+
+                </div>
+
+
+                <br /><br />
+                <div class="row">
+
+
+                    <div class="col-md-6">
+                        <div ng-class="" class="form-group">
+                            <label class="col-sm-5 control-label">Print Options</label>
+                            <div class="col-sm-7">
+
+                                <select kendo-drop-down-list
+                                        required
+                                        name="CPOSoutletSMSPrintingOption"
+                                        ng-model="CPOSoutletSMSPrintingOption"
+                                        class="k-fill" ng-change="ChangePrint()"
+                                        k-data-text-field="'text'"
+                                        k-data-value-field="'value'"
+                                        k-data-source="OptionsPrintingOption"></select>
+                                <!--ng-disabled="PrintAllButton12"-->
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <div ng-class="" class="form-group">
+                            <button permission-code="'50100'" class="btn btn-warning btn-sm" ng-disabled="disabled.SaveButton" type="button" ng-click="PostBillData()">Save</button>
+                            <!--<button class="btn btn-success btn-sm" ng-disabled="disabled.ContractSummaryButton" type="button" ng-click="PostContractSumarry()">Contract Summary</button>-->
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </form>
+        </div>
+        <div class="tab-pane" id="ReceiptDetails">
+
+            <form name="ReceiptDetails" class="form-horizontal" novalidate>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <!--  <div ng-class="" class="form-group">
+                            <label class="col-sm-5 control-label">Batch ID</label>
+                            <div class="col-sm-7">
+                                <div class="input-group">
+                                    <input type="text" ng-blur="GetReceiptDetailsByBatchId()" ng-model="BulkPayment.BatchIdRec" name="BatchIdRec" class="k-input k-textbox k-fill ng-pristine ng-invalid ng-invalid-required">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button" ng-click="ReceiptDetailsBatchID.open()" tooltip title="{{label.search}}"><i class="icon icon_search"></i></button>
+
+                                    </span>
+                                </div>
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+                                        Batch ID is required
+                                    </p>
+                                </div>
+                            </div>
+                        </div>-->
+                    </div>
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <!--<div class="panel-heading"><b>Upload Summary</b></div>-->
+
+                            <table class="table table-bordered  table-hover">
+
+                                <tbody>
+                                    <tr ng-show="false"><th width="50%" class="control-label">Payment Mode</th><td ng-bind="BulkPayment.PaymentMode" class="ng-binding  text-right"></td></tr>
+                                    <tr ng-show="false"><th width="50%" class="control-label">UserId</th><td ng-bind="BulkPayment.UserId" class="ng-binding  text-right"></td></tr>
+                                    <tr><th width="50%" class="control-label">User</th><td ng-bind="BulkPayment.User" class="ng-binding  text-right"></td></tr>
+                                    <tr><th width="50%" class="control-label">Payment Source</th><td ng-bind="BulkPayment.PaymentSourceRec" class="ng-binding  text-right"></td></tr>
+                                    <tr><th width="50%" class="control-label">Date &amp; Time</th><td ng-bind="BulkPayment.DateTime" class="ng-binding  text-right"></td></tr>
+
+                                </tbody>
+                            </table>
+
+
+                        </div>
+                        <!--<div ng-class="" class="form-group">
+                            <label class="col-sm-5 control-label">User</label>
+                            <div class="col-sm-7">
+
+                                <input type="text" ng-model="BulkPayment.User" name="User" ng-readonly="true" class="k-input k-textbox k-fill ng-pristine ng-valid" readonly="readonly">
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Payment Source</label>
+                            <div class="col-sm-7">
+                                <input type="text" ng-model="BulkPayment.PaymentSource" name="PaymentSource" ng-readonly="true" class="k-input k-textbox k-fill ng-pristine ng-valid" readonly="readonly">
+                                <p class="help-block"></p>
+                            </div>
+                        </div>
+
+                        <div ng-class="" class="form-group">
+                            <label class="col-sm-5 control-label">Date &amp; Time</label>
+                            <div class="col-sm-7">
+                                <input type="text" ng-model="BulkPayment.DateTime" name="DateTime" ng-readonly="true" class="k-input k-textbox k-fill ng-pristine ng-valid" readonly="readonly">
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>-->
+
+
+                    </div>
+
+                </div>
+
+                <br />
+                <div class="row">
+                    <div class="col-md-12">
+
+
+                        <div id="dgReceiptDetails" tabindex="0"
+                             kendo-grid="dgReceiptDetails"
+                             ng-init="InitB('dgReceiptDetails')"
+                             k-options="dgGridReceiptDetails.options()">
+                        </div>
+                    </div>
+                </div>
+
+
+                <br />
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div ng-class="" class="form-group">
+                            <label class="col-sm-5 control-label">Print Options</label>
+                            <div class="col-sm-7">
+
+                                <select kendo-drop-down-list
+                                        required
+                                        name="CPOSoutletSMSPrintingOption"
+                                        ng-model="CPOSoutletSMSPrintingOption"
+                                        class="k-fill" ng-change="ChangePrint()"
+                                        k-data-text-field="'text'"
+                                        k-data-value-field="'value'"
+                                        k-data-source="OptionsPrintingOption"></select>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <div ng-class="" class="form-group">
+
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+
+            </form>
+
+        </div>
+    </div>
+    <button permission-code="'50101'" type="button" ng-click="BulkPrintReceipts()" name="PrintAllButton" ng-disabled="PrintAllButton12" class="btn btn-info btn-sm">Print All</button>
+    <button permission-code="'50101'" type="button" ng-click="DirectBulkPrintReceipts()" name="DirectPrintAllButton" ng-disabled="PrintAllButton12" class="btn btn-info btn-sm">Direct Print</button>
+    <button permission-code="'50102'" class="btn btn-primary btn-sm" ng-disabled="disabled.BulkEmailButton" type="button" ng-click="BulkEmailReceipts()">Bulk E-mail</button>
+    <button permission-code="'50103'" class="btn btn-danger btn-sm" ng-click="CancelBulkReceipt()" ng-disabled="disabled.BulkCancelButton" type="button">Cancel Batch</button>
+    <button permission-code="'50101'" data-toggle="modal" class="btn btn-danger btn-sm" ng-disabled="disabled.BulkCancelButton" ng-click="Open3GSIM()" type="button">3G->4G SIM</button>
+    <!--<button class="btn btn-danger btn-sm" ng-click="TabChange()" ng-disabled="disabled.BulkCancelButton" type="button">Tab Change</button>-->
+    <!------------------------------3G Sim Modal------------------------------------------------------------------------------>
+
+    <div>
+        <div class="modal fade" id="3GSIMModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">3G->4G SIM Conversion</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="widget">
+                            <div class="widget-body form-horizontal">
+                                <message ng-model="MessageBox"></message>
+                                <div id="dg3GSIM" tabindex="0"
+                                     kendo-grid="dg3GSIM"
+                                     ng-init="Init3GSIM('dg3GSIM')"
+                                     k-options="dgGrid3GSIM.options()">
+                                </div>
+                                <br />
+                                <fieldset>
+                                    <div>
+                                        <label class="col-sm-7 control-label">Total SIM Count</label>
+                                        <div class="col-sm-5">
+                                            <div class="input-group">
+                                                <input type="text" name="SIMCount" ng-model="BulkPayment.SIMCount" class="k-input k-textbox k-fill" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" ng-click="Update3GSIMDetails()" ng-disabled="">Update</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+        <!------------------------------------------------------------------------------------------------------------------------->
+    
+
+    <!--<button class="btn btn-danger btn-sm" ng-click="YesNoMessageOpen()" type="button">YES ? NO</button>
+    <input type="text" ng-model="result.objYesNo" />-->
+
+
+    <bulk-excel-verification id="myBulkExcelVerification"
+                             title="{{bulkExcelVerificationDirectiveParams.title}}"
+                             params="bulkExcelVerificationDirectiveParams.params"
+                             data="{{bulkExcelVerificationDirectiveParams.data}}"
+                             callback="bulkExcelVerificationDirectiveParams.callback"></bulk-excel-verification>
+
+    <!--<add-payments id="myAddPayments"
+                  title="{{addPaymentsDirectiveParams.title}}"
+                  params="addPaymentsDirectiveParams.params"
+                  disable="addPaymentsDirectiveParams.disable"
+                  data="{{addPaymentsDirectiveParams.data}}"
+                  callback="addPaymentsDirectiveParams.callback"></add-payments>-->
+
+    <finder-new id="finderBulkBillingBatchID"
+                title="{{finderBulkBillingBatchID.title}}"
+                params="finderBulkBillingBatchID.params"
+                info="finderBulkBillingBatchID.info"
+                callback="finderBulkBillingBatchID.callback"></finder-new>
+
+
+    <reference options="referenceParams" callback="referenceCallback"></reference>
+    <posting-status id="myPostingStatus"
+                    title="{{postingStatusDirectiveParams.title}}"></posting-status>
+
+    <adf-remarks id="myADFRemarks"
+                 title="{{adfRemarksDirectiveParams.title}}"
+                 params="adfRemarksDirectiveParams.params"
+                 data="{{adfRemarksDirectiveParams.data}}"
+                 callback="adfRemarksDirectiveParams.callback"></adf-remarks>
+
+    <yes-no options="yesNoMessageParams" callback="yesNoMessageCallback" message="customMessage"></yes-no>
+
+
+    <finder-new id="findExistingRef"
+                title="{{findExistingRef.title}}"
+                params="findExistingRef.params"
+                info="findExistingRef.info"
+                callback="findExistingRef.callback"></finder-new>
+
+    <add-payments-new id="myAddPaymentsNew"
+                      callback="myAddPaymentsNew.callback"
+                      on-submit="onDataSubmit($data)"></add-payments-new>
+
+    <add-bill-invoice-payments id="popAddBillInvoicePayments"
+                               on-submit="onDataSubmit($data)"></add-bill-invoice-payments>

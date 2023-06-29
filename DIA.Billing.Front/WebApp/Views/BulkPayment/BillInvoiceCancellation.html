@@ -1,0 +1,197 @@
+﻿<h1 ng-bind="Title()"></h1>
+
+<div class="container" ng-mousemove="UpdateDateTime()">
+
+
+
+
+    <div class="widget">
+        <div class="widget-body">
+
+            <form class="form-horizontal" novalidate>
+
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <div ng-class="" class="form-group">
+                            <label class="col-sm-5 control-label">Cancellation Batch ID</label>
+                            <div class="col-sm-7">
+
+                                <div class="input-group">
+                                    <input type="text" ng-model="billinvoiceCancel.BathId" ng-blur="GetByBatchId()" class="k-input k-textbox k-fill" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button" ng-click="BillInvoiceCancellationBatchID.open()" tooltip title="{{label.search}}"><i class="icon icon_search"></i></button>
+                                        <button class="btn btn-default" type="button" ng-click="clearForm()" tooltip title="{{label.create}}"><i class="icon icon_plus"></i></button>
+                                    </span>
+                                </div>
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+
+                                    </p>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                     
+
+
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Cancellation Reason Code</label>
+                            <div class="col-sm-7">
+
+                                <select kendo-drop-down-list class="k-fill"
+                                        k-placeholder="'Select '"
+                                        k-data-text-field="'Description'"
+                                        k-data-value-field="'Id'"
+                                        k-data-source="cancellattonCode"
+                                        ng-model="billinvoiceCancel.cancelCode"
+                                        ng-disabled="billinvoiceCancel.BathId"></select>
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Cancellation Reason Descript.</label>
+                            <div class="col-sm-7">
+
+                                <select kendo-drop-down-list class="k-fill"
+                                        k-placeholder="'Select '"
+                                        k-data-text-field="'Description'"
+                                        k-data-value-field="'Id'"
+                                        k-data-source="CancellationDesc"
+                                        ng-model="billinvoiceCancel.CancelDesc"
+                                        ng-disabled="billinvoiceCancel.BathId"></select>
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Mistake Done By</label>
+                            <div class="col-sm-7">
+
+                                <select kendo-drop-down-list
+                                        required
+                                        class="k-fill"
+                                        k-data-text-field="'text'"
+                                        k-data-value-field="'value'"
+                                        k-data-source="OptionsMistakeDoneBy"
+                                        ng-model="OptionsMistakeDoneBy"
+                                        ></select>
+
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Cancellation Remarks</label>
+                            <div class="col-sm-7">
+
+                                <textarea class="k-fill k-textbox" ng-model="billinvoiceCancel.CancelRemark" ng-disabled="billinvoiceCancel.BathId"></textarea>
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <table class="table table-bordered table-condensed  table-hover">
+
+                            <tbody>
+                                <tr><td width="60%">Batch Date &amp; Time</td><td ng-bind="billinvoiceCancel.time" class="ng-binding  text-right"></td></tr>
+                                <tr><td>Workflow Status</td><td ng-bind="billinvoiceCancel.status" class="ng-binding  text-right"></td></tr>
+                                <tr><td>Workflow Ref</td><td ng-bind="billinvoiceCancel.WorkflowReference" class="ng-binding  text-right"></td></tr>
+                            </tbody>
+                        </table>
+
+
+
+
+                        <div class="well well-md">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label class="checkbox"><input type="checkbox" ng-model="billinvoiceCancel.originalReceipt" />Original Receipt</label>
+                                    <label class="checkbox"><input type="checkbox" ng-model="billinvoiceCancel.PayTransForm" />Payment Transfer Form</label>
+                                    <!--<label class="checkbox"><input type="checkbox" ng-model="billinvoiceCancel.Email" />Email</label>-->
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="checkbox"><input type="checkbox" ng-model="billinvoiceCancel.NicCopy" />NIC Copy</label>
+                                    <label class="checkbox"><input type="checkbox" ng-model="billinvoiceCancel.ReqLetter" />Customer Request Letter</label>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <label class="col-sm-5 control-label">Reference <span class="label label-success" ng-model="IsAttach" ng-bind="IsAttach" ng-class="{'YES':'label-success', 'NO':'label-default'}[IsAttach]"></span></label>
+                                <div class="col-sm-7">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ReferenceViewRemoveAttachments">View / Remove</button>
+                                        <button type="button" class="btn btn-primary  btn-sm" data-toggle="modal" data-target="#ReferenceAddAttachments">Add</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+
+
+
+                    </div>
+
+                </div>
+
+                <br />
+                <div class="row">
+                    <div class="col-md-12"> 
+                     
+                        <div id="dgGridBillInvoiceCancellation" tabindex="0"
+                             kendo-grid="dgGridBillInvoiceCancellation"
+                             ng-init="InitA('dgGridBillInvoiceCancellation')"
+                             k-options="dgGridBillInvoiceCancellation.options()">
+                        </div>
+
+                    </div>
+
+                </div>
+                <br />
+             
+                <div class="row">
+                    <div class="col-md-12">
+                        <button permission-code="'50103'" class="btn btn-primary" ng-click="SubmitCancellation()" ng-disabled="billinvoiceCancel.BathId" type="button">Save</button>
+                    </div>
+                </div>
+
+
+            </form>
+
+        </div>
+    </div>
+
+
+</div>
+
+<finder-new id="BillInvoiceCancellationBatchID"
+            title="{{BillInvoiceCancellationBatchID.title}}"
+            params="BillInvoiceCancellationBatchID.params"
+            info="BillInvoiceCancellationBatchID.info"
+            callback="BillInvoiceCancellationBatchID.callback"></finder-new>

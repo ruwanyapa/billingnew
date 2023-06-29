@@ -1,0 +1,129 @@
+<div>
+    <message ng-model="payAlertMessage" ng-hide ="true"></message>
+
+    <ng-form name="frmPayCheque">
+        <div> 
+            <label class="checkbox" permission-code="'29001'"> 
+                <input type="checkbox" ng-model="Cheque.ChForcefulRealization" ng-change="chequeForceRealization()"/>Forceful Realization
+            </label>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : (hasError(frmPayCheque.ChequeNo1) || hasError(frmPayCheque.ChequeNo2) || hasError(frmPayCheque.ChequeNo3))}">
+            <label class="col-sm-4 control-label">Cheque Number</label>
+            <div class="col-sm-8">
+                <div class="input-group input-group-lg">
+                    <input type="text" id="ChequeNo3" name="ChequeNo3" class="k-input k-textbox k-fill" ng-change="FocusToNextCheqBox(1,$event)" ng-keypress="ValidateCheqLength(1,$event)" ng-model="Cheque.ChNo3" ng-blur="chequeReslove()" required tooltip title="Cheque Number" maxlength="6" />
+                    <span class="input-group-btn"></span>
+                    <input type="text" id="ChequeNo1" name="ChequeNo1" class="k-input k-textbox k-fill" ng-change="FocusToNextCheqBox(2,$event)" ng-keypress="ValidateCheqLength(2,$event)" ng-model="Cheque.ChNo1" ng-blur="chequeReslove()" required tooltip title="Bank" maxlength="6" />
+                    <span class="input-group-btn"></span>
+                    <input type="text" id="ChequeNo2" name="ChequeNo2" class="k-input k-textbox k-fill" ng-change="FocusToNextCheqBox(3,$event)" ng-keypress="ValidateCheqLength(3,$event)" ng-model="Cheque.ChNo2" ng-blur="chequeReslove()" required tooltip title="Branch" maxlength="6" />
+                    
+                    
+                </div>
+                <p ng-show="(hasError(frmPayCheque.ChequeNo1, ErrorTypes.Required) || hasError(frmPayCheque.ChequeNo2, ErrorTypes.Required) || hasError(frmPayCheque.ChequeNo3, ErrorTypes.Required))" class="help-block">Cheque No is required</p>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : hasError(frmPayCheque.ChDate)}">
+            <label class="col-sm-4 control-label">Cheque Date</label>
+            <div class="col-sm-8">
+                <input type="text" name="ChDate" id="ChDate" ng-model="Cheque.ChDate" ng-readonly="true" required />
+                <p ng-show="hasError(frmPayCheque.ChDate, ErrorTypes.Required)" class="help-block">Cheque date is required</p>
+            </div>
+            <div ng-init="chequeInitDatePickers('ChDate')"></div>
+        </div>
+
+        <div class="form-group" ng-show="Cheque.ChIsOtherBank == false">
+            <label class="col-sm-4 control-label">Bank</label>
+            <div class="col-sm-8">
+                <input type="text" class="k-input k-textbox k-fill" ng-model="Cheque.ChBank" ng-readonly="true"/>               
+            </div>
+        </div>
+
+        <div class="form-group" ng-show="Cheque.ChIsOtherBank == true" ng-class="{ 'has-error' : (Cheque.ChIsOtherBank == true && hasError(frmPayCheque.ChOtherBank))}">
+            <label class="col-sm-4 control-label">Other bank</label>
+            <div class="col-sm-8">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <input type="checkbox" ng-model="Cheque.ChIsOtherBank" ng-disabled="true" ng-hide="true"/>
+                    </span>
+                    <input type="text" name="ChOtherBank" class="k-input k-textbox k-fill" ng-model="Cheque.ChOtherBank" ng-required="Cheque.ChIsOtherBank" />
+                </div>
+                <p ng-show="(Cheque.ChIsOtherBank == true && hasError(frmPayCheque.ChOtherBank, ErrorTypes.Required))" class="help-block">Other bank is required</p>
+            </div>
+        </div>
+
+        <div class="form-group" ng-show="Cheque.ChIsOtherBranch == false">
+            <label class="col-sm-4 control-label">Branch</label>
+            <div class="col-sm-8">
+                <input type="text" class="k-input k-textbox k-fill" ng-model="Cheque.ChBranch" ng-readonly="true" />                
+            </div>
+        </div>
+
+        <div class="form-group" ng-show="Cheque.ChIsOtherBranch == true" ng-class="{ 'has-error' : (Cheque.ChIsOtherBranch == true && hasError(frmPayCheque.ChOtherBranch))}">
+            <label class="col-sm-4 control-label">Other Branch</label>
+            <div class="col-sm-8">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <input type="checkbox" ng-model="Cheque.ChIsOtherBranch" ng-disabled="true" ng-hide="true" />
+                    </span>
+                    <input type="text" name="ChOtherBranch" class="k-input k-textbox k-fill" ng-model="Cheque.ChOtherBranch" ng-required="Cheque.ChIsOtherBranch"/>
+                </div>
+                <p ng-show="(Cheque.ChIsOtherBranch == true && hasError(frmPayCheque.ChOtherBranch, ErrorTypes.Required))" class="help-block">Other branch is required</p>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="">
+            <label class="col-sm-4 control-label">Realized Status</label>
+            <div class="col-sm-8">
+                <input type="text" class="k-input k-textbox k-fill" ng-model="Cheque.ChRealizedStatus" ng-disabled="true" />
+                <p ng-show="" class="help-block">... </p>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="">
+            <label class="col-sm-4 control-label">Realized Date & Time</label>
+            <div class="col-sm-8">
+                <input type="text" class="k-input k-textbox k-fill" ng-model="Cheque.ChRealizedDate" ng-disabled="true" />
+                <p ng-show="" class="help-block">... </p>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : hasError(frmPayCheque.ChRemarks)}">
+            <label class="col-sm-4 control-label">Remarks</label>
+            <div class="col-sm-8">
+                <input type="text" name="ChRemarks" class="k-input k-textbox k-fill" ng-model="Cheque.ChRemarks" ng-maxlength="250"/>
+                <p ng-show="hasError(frmPayCheque.ChRemarks, ErrorTypes.Maxlength)" class="help-block">Length of remakrs should be less than 250</p>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : hasError(frmPayCheque.ContactNo)}">
+            <label class="col-sm-4 control-label">Contact Number</label>
+            <div class="col-sm-8">
+                <input type="number" name="ContactNo" class="k-input k-textbox k-fill" ng-model="Cheque.ContactNo" ng-maxlength="9" ng-maxlength="1" />
+                <p ng-show="hasError(frmPayCheque.ContactNo, ErrorTypes.Maxlength)" class="help-block">Length of Conatct Number should be less than 09</p>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : hasError(frmPayCheque.Email)}">
+            <label class="col-sm-4 control-label">Email Address</label>
+            <div class="col-sm-8">
+                <input type="email" name="Email" class="k-input k-textbox k-fill" ng-model="Cheque.Email" ng-maxlength="100" />
+                <p ng-show="hasError(frmPayCheque.Email, ErrorTypes.Maxlength)" class="help-block">Length of remakrs should be less than 100</p>
+            </div>
+        </div>
+        <div class="form-group" ng-class="">
+            <label class="col-sm-4 control-label">Updated By</label>
+            <div class="col-sm-8">
+                <input type="text" class="k-input k-textbox k-fill" ng-model="Cheque.ChUpdatedBy" ng-readonly="true" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-8 col-sm-offset-4">
+                <button type="button" class="btn btn-success" name="btnSaveCheck" ng-model="Cheque.btnSaveCheck" ng-disabled="disabled.btnSaveCheck" ng-click="chequeSubmit(frmPayCheque)">Save</button>
+            </div>
+        </div>
+        
+    </ng-form>
+</div>

@@ -1,0 +1,191 @@
+﻿<h1 ng-bind="Title()"></h1>
+
+<div class="container" >
+
+    <message ng-model="alertMessage"></message>
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="widget">
+                <div class="widget-body">
+
+                    <form class="form-horizontal" novalidate>
+
+                        <div class="row">
+                            <div class="col-md-6">
+
+                                <div ng-class="" class="form-group">
+                                    <label class="col-sm-5 control-label">Transaction ID</label>
+                                    <div class="col-sm-7">
+
+                                        <div class="input-group">
+                                            <input type="text" ng-model="ChequeReturn.TransNo" name="TransNo" ng-blur="GetReturnDetails()" class="k-input k-textbox k-fill" readonly="readonly" />
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default" type="button" ng-click="TransactionIDSearch.open()" tooltip title="{{label.search}}"><i class="icon icon_search"></i></button>
+                                                <button class="btn btn-default" type="button" ng-click="ClearDetails()" tooltip title="{{label.create}}"><i class="icon icon_plus"></i></button>
+                                            </span>
+                                        </div>
+                                        <div ng-show="" class="ng-hide">
+                                            <p ng-show="" class="help-block ng-hide">
+
+                                            </p>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-5 control-label">Cheque No</label>
+                                    <div class="col-sm-7">
+                                        <div class="input-group crcontainer">
+                                            <input type="text" class="k-input k-textbox k-fill" placeholder="Cheque No" ng-model="ChequeReturn.ChNo" name="ChNo"  maxlength="6" ng-maxlength="6" />
+                                            <span class="input-group-btn"> - </span>
+                                            <input type="text" class="k-input k-textbox k-fill" placeholder="Bank Code" ng-model="ChequeReturn.ChBank" name="ChBank"  maxlength="4" ng-maxlength="4" />
+                                            <span class="input-group-btn"> - </span>
+                                            <input type="text" class="k-input k-textbox k-fill" placeholder="BranchCode" ng-model="ChequeReturn.ChBranch" name="ChBranch"  maxlength="3" ng-maxlength="3" />
+                                            <span class="input-group-btn"> - </span>
+                                            <span class="input-group-btn"><button class="btn btn-sm btn-primary" type="button" ng-click="GetChequeDetailsByNo()" tooltip title="Retrieve"><i class="icon icon_document"></i></button></span>
+
+                                        </div>
+
+                                        <div ng-show="" class="ng-hide">
+                                            <p ng-show="" class="help-block ng-hide">
+
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!--<div class="form-group">
+                                    <label class="col-sm-5 control-label"></label>
+                                    <div class="col-sm-7">
+                                        <button class="btn btn-primary" ng-click="GetChequeDetailsByNo()" type="button">Retreive</button>
+                                    </div>
+                                </div>-->
+                                <div ng-class="" class="form-group">
+                                    <label class="col-sm-5 control-label">Return Reason Code</label>
+                                    <div class="col-sm-7">
+
+                                        <select kendo-drop-down-list class="k-fill"
+                                                k-data-text-field="'Id'"
+                                                k-data-value-field="'Id'"
+                                                k-data-source="ReturnReasonsCollection"
+                                                ng-model="ChequeReturn.ReasonCode"></select>
+                                        <div ng-show="" class="ng-hide">
+                                            <p ng-show="" class="help-block ng-hide">
+
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div ng-class="" class="form-group">
+                                    <label class="col-sm-5 control-label">Return Reason Description</label>
+                                    <div class="col-sm-7">
+
+                                        <select kendo-drop-down-list class="k-fill"
+                                                k-data-text-field="'Description'"
+                                                k-data-value-field="'Id'"
+                                                k-data-source="ReturnReasonsCollection"
+                                                ng-model="ChequeReturn.ReasonCode"></select>
+                                        <div ng-show="" class="ng-hide">
+                                            <p ng-show="" class="help-block ng-hide">
+
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+
+                                <table class="table table-bordered  table-condensed  table-hover">
+
+                                    <tbody>
+                                        <tr><td width="60%">Date &amp; Time</td><td class="ng-binding  text-right">{{ChequeReturn.DateTime}}</td></tr>
+                                        <tr><td>Cheque Amount<td class="ng-binding  text-right">{{ChequeReturn.ChAmount|currency:''}}</td></tr>
+                                        <tr><td>Cheque Date</td><td class="ng-binding  text-right">{{ChequeReturn.ChDate}}</td></tr>
+                                        <tr><td>Bank name</td><td class="ng-binding  text-right">{{ChequeReturn.ChBankName}}</td></tr>
+                                        <tr><td>Branch Name</td> <td class="ng-binding  text-right">{{ChequeReturn.ChBranchName}}</td></tr>
+                                        <tr><td>Receipt Entered User</td> <td class="ng-binding  text-right">{{ChequeReturn.RecUser}}</td></tr>
+
+                                    </tbody>
+                                </table>
+
+                                <br /><br />
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="dgGridChequeReturntest" tabindex="0"
+                                     kendo-grid="dgGridChequeReturntest"
+                                     ng-init="InitA('dgGridChequeReturntest')"
+                                     k-options="abcdgGridChequeReturn.options()">
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <br />
+
+
+
+                    </form>
+                </div>
+            </div>
+
+            <div>
+                <button class="btn btn-primary" type="button" ng-click="PostChqDetails()" ng-disabled="false">Submit</button>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<div class="modal fade" id="GoodIssueBulkSerial" tabindex="-1" role="dialog" aria-labelledby="confirmationProfileLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="confirmationProfileLabel">Duplicate Cheque Details</h4>
+            </div>
+            <div class="modal-body">
+
+                <form name="CustomerProfile" class="form-horizontal" novalidate>
+                    <message ng-model="alertMessageBulk"></message>
+
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="dgGridBulkReceiptPrinting" tabindex="0"
+                                     kendo-grid="dgGridBulkReceiptPrinting"
+                                     ng-init="InitB('dgGridBulkReceiptPrinting')"
+                                     k-options="dgconfigBulkChqBatchId.options()">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer clearfix">
+                        <button type="button" class="btn btn-sm  btn-default" ng-click="selectChqBatches()" data-dismiss="modal">Ok</button>
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<finder-new id="TransactionIDSearch"
+            title="{{TransactionIDSearch.title}}"
+            params="TransactionIDSearch.params"
+            info="TransactionIDSearch.info"
+            callback="TransactionIDSearch.callback"></finder-new>

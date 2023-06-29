@@ -1,0 +1,103 @@
+﻿<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addPayments" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <ng-form name="AddPaymentsForm" ng-submit="submitForm()">
+                <div class="modal-header">
+                    <message ng-model="alertMessage"  ng-hide="true"></message>
+
+                    <button type="button" class="close" data-dismiss="modal" ng-click="changeAddPaymentPageState();"><span aria-hidden="true">&times;</span><span class="sr-only">OK</span></button>
+                    <h4 class="modal-title" ng-bind="title"></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="widget">
+                        <div class="widget-body">
+
+
+
+
+                            <!-- AddPayments Modal content ///////-->
+                            <div>
+
+
+                                <div class="row">
+                                    <div class="col-md-12" >
+
+                                        
+                                        <div id="dgAddPaymentsEnterId" tabindex="0"
+                                             kendo-grid="dgAddPaymentsEnter1"
+                                             ng-init="Init('dgAddPaymentsEnterId')"
+                                             k-options="dgGridAddPaymentsEnter.options()">
+                                        </div>
+                                        <div id="dgDataEntryId" tabindex="0"
+                                             kendo-grid="dgDataEntryId1"
+                                             ng-init="Init2('dgDataEntryId')"
+                                             k-options="dgGridDataEntry.options()">
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <br />
+
+</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer clearfix">
+                    <div class="row">
+                        <div class="col-md-5">
+
+                            <div ng-class="" class="form-group">
+                                <label class="col-sm-5 control-label text-right">No of Records</label>
+                                <div class="col-sm-5">
+
+                                    <input type="text" class="k-input k-textbox k-fill ng-pristine ng-valid" ng-model="RandomBill.totRec" name="totRec" readonly="readonly">
+
+                                    <div ng-show="" class="ng-hide">
+                                        <p ng-show="" class="help-block ng-hide">
+
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-md-5 pull-right">
+
+                            <div ng-class="" class="form-group">
+                                <label class="col-sm-5 control-label text-right">Total Amount</label>
+                                <div class="col-sm-5">
+
+                                    <input type="text" class="k-input k-textbox k-fill ng-pristine ng-valid" ng-model="RandomBill.totalAmt" name="totalAmt" readonly="readonly">
+
+                                    <div ng-show="" class="ng-hide">
+                                        <p ng-show="" class="help-block ng-hide">
+
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="pull-right">
+                                <button class="btn btn-primary btn-sm" type="button" ng-click="CalcTotal()">View Total Amount</button>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button class="btn btn-primary btn-sm" type="button" data-dismiss="modal" ng-disabled="RandomBill.AddPaymentButton" ng-click="submitForm(); changeAddPaymentPageState('NEW')">Submit</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </ng-form>
+        </div>
+    </div>
+</div>

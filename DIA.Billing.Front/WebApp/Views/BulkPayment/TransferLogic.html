@@ -1,0 +1,212 @@
+﻿<h1 ng-bind="Title()"></h1>
+
+<div class="container">
+
+    <message ng-model="alertMessage"></message>
+
+
+
+    <div class="row">
+        <div class="col-md-7">
+
+            <div class="widget">
+                <div class="widget-body">
+
+                    <form class="form-horizontal" novalidate>
+
+                        <div ng-class="" class="form-group">
+                            <label class="col-sm-5 control-label">Cancelling Receipt Payment Type</label>
+                            <div class="col-sm-6">
+
+                                <div class="input-group">
+
+                                    <select kendo-drop-down-list class="k-fill"
+                                        k-placeholder="'Select '"
+                                        k-data-text-field="'Description'"
+                                        k-data-value-field="'Id'"
+                                        ng-model="TransferLogic.PaymentType"
+                                        k-data-source="PaymentTypeCollection" ng-change="LoadPaymentSourseByPaymentType();"></select>
+                                    
+                                    <input type="text" name="Id" ng-model="TransferLogic.Id" class="ng-pristine ng-valid" ng-hide="true">
+                                    
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button" ng-click="finderTransferLogicId.open()" ><i class="icon icon_search"></i></button>
+
+                                        <button class="btn btn-default" type="button" ng-click="changePageState('NEW')" tooltip title="{{label.create}}"><i class="icon icon_plus"></i></button>
+                                       
+                                    </span>
+
+                                </div>
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+
+                                    </p>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                        <div ng-class="" class="form-group">
+                            <label class="col-sm-5 control-label">From - Transfer Product </label>
+                            <div class="col-sm-6">
+
+                                <select kendo-drop-down-list class="k-fill"
+                                        k-placeholder="'Select '"
+                                        k-data-text-field="'TypeMapping'"
+                                        k-data-value-field="'TypeMapping'"
+                                        ng-model="TransferLogic.FromTransferProduct"
+                                        k-data-source="FromTransferProductCollection" ng-change="LoadPaymentSourseByPaymentType();"></select>
+
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-class="" class="form-group">
+                            <label class="col-sm-5 control-label">To - Transfer Product </label>
+                            <div class="col-sm-6">
+
+                                <select kendo-drop-down-list class="k-fill"
+                                        k-placeholder="'Select '"
+                                        k-data-text-field="'TypeMapping'"
+                                        k-data-value-field="'TypeMapping'"
+                                        ng-model="TransferLogic.ToTransferProduct"
+                                        k-data-source="ToTransferProductCollection" ng-change="LoadPaymentSourseByPaymentType();"></select>
+
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-class="" class="form-group">
+                            <label class="col-sm-5 control-label">New Receipt Payment Method</label>
+                            <div class="col-sm-6">
+
+                                <select kendo-drop-down-list class="k-fill"
+                                        k-placeholder="'Select '"
+                                        k-data-text-field="'Description'"
+                                        k-data-value-field="'Id'"
+                                        ng-model="TransferLogic.NewPaymentMethod"
+                                        k-data-source="NewPaymentMethodCollection" ng-change="LoadPaymentSourseByPaymentType();"></select>
+
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-class="" class="form-group">
+                            <label class="col-sm-5 control-label">New Receipt Payment Mode</label>
+                            <div class="col-sm-6">
+
+                               <select kendo-drop-down-list class="k-fill"
+                                        k-placeholder="'Select '"
+                                        k-data-text-field="'Description'"
+                                        k-data-value-field="'Id'"
+                                        ng-model="TransferLogic.NewPaymentMode"
+                                        k-data-source="NewPaymentModeCollection" ng-change="LoadPaymentSourseByPaymentType();"></select>
+
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group margin-bottom-0 ng-isolate-scope">
+                            <div class="col-sm-6 col-sm-offset-5">
+                                <label class="checkbox">
+                                    <input type="checkbox" name="IsActive" ng-model="TransferLogic.IsActive" class="ng-pristine ng-valid"> Inactive
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+
+            <div>
+<!--                <button class="btn btn-info" type="button" ng-click="PostTransferDetails()>Edit</button>-->
+                <button class="btn btn-success" type="button" ng-click="PostTransferDetails()">Save</button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+<div id="TransferLogicFinder" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">OK</span></button>
+                <h4 class="modal-title">Transfer Logic Finder</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="widget">
+                            <div class="widget-body">
+
+                                <div class="row">
+                                    <div class="col-md-8">
+
+                                        <div class="form-group">
+                                            <label class="col-sm-5 control-label text-right">Payment Type</label>
+                                            <div class="col-sm-7">
+
+                                                <select kendo-drop-down-list required class="k-fill" />
+                                                <div ng-show="" class="ng-hide">
+                                                    <p ng-show="" class="help-block ng-hide">
+
+                                                    </p>
+                                                </div>
+                                                <br/><br />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+
+                                            <div id="dgGridTransferLogic"
+                                                 kendo-grid="dgGridTransferLogic"
+                                                 ng-init="Init('dgGridTransferLogic')"
+                                                 k-options="dgGridTransferLogic.options()">
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<finder-new id="finderTransferLogicId"
+            title="{{finderTransferLogicId.title}}"
+            params="finderTransferLogicId.params"
+            info="finderTransferLogicId.info"
+            callback="finderTransferLogicId.callback"></finder-new>

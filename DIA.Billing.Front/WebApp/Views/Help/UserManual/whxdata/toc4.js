@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc.js\"  name=\"Payment Cancellation\"><item name=\"Cancel Only\" url=\"Cancel_Only.htm\" /><item name=\"Cancel with correct entry\" url=\"Cancel_with_correct_entry.htm\" /><item name=\"Bulk Upload\" url=\"Bulk_Upload1.htm\" /><item name=\"Batch Cancellation\" url=\"Batch_Cancellation.htm\" /></data>";

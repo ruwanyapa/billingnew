@@ -1,0 +1,218 @@
+﻿<h1 ng-bind="Title()"></h1>
+<div class="container">
+    <form name="CreateUserForm" ng-submit="createUser(CreateUserForm)" class="form-horizontal" autocomplete="off" novalidate>
+        <input type="text" name="prevent_autofill" id="prevent_autofill" value="" style="display:none;" />
+        <input type="password" name="password_fake" id="password_fake" value="" style="display:none;" />
+
+        <message ng-model="alertMessage"></message>
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="widget">
+                    <div class="widget-title">Basic Information</div>
+                    <div class="widget-body">
+                        
+                        
+
+                        <fieldset>
+
+                            <div class="form-group" ng-class="{ 'has-error' : CreateUserForm.AccountType.$invalid && !CreateUserForm.AccountType.$pristine }">
+                                <label class="col-sm-4 control-label">Account Type {{user.AccType}}</label>
+                                <div class="col-sm-8">
+                                    <select ng-model="user.AccountType" autofocus
+                                            name="AccountType"
+                                            kendo-drop-down-list
+                                            ng-change="checkAccountTypeTicketSys()"
+                                            class="k-fill"
+                                            required>
+                                        <option value="">Select ...</option>
+                                        <option value="0">SYSTEM</option>
+                                        <option value="1">DOMAIN</option>
+                                    </select>
+                                    <p ng-show="CreateUserForm.AccountType.$invalid && !CreateUserForm.AccountType.$pristine" class="help-block"> User Group Is Required.</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-class="">
+                                <label class="col-sm-4 control-label">Group ID</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <input type="text"
+                                               ng-disabled=""
+                                               class="k-input k-textbox k-fill"
+                                               name="GroupId" maxlength="8"
+                                               ng-model="user.GroupId"
+                                        <!--ng-minlength="1"-->
+                                        <span class="input-group-btn">
+                                           
+
+                                            <button class="btn btn-default" type="button" ng-click="finderGropID.open()" tooltip title="{{label.search}}"><i class="icon icon_search"></i></button>
+                                        </span><!--data-toggle="modal" data-target="#modalUserId"-->
+                                    </div>
+                                </div>
+                            </div> 
+
+                        </fieldset>
+                        
+                        <fieldset ng-hide="user.AccountType == 0">
+                            <div class="form-group">
+                                <div class="col-sm-offset-4 col-sm-8">
+                                    <div class="radio">
+                                        <label><input ng-init="user.accountTypeOption = 'Single Sign On'" type="radio" ng-model="user.accountTypeOption" value="Single Sign On"> Single Sign On</label>
+                                    </div>
+                                    <div class="radio">
+                                        <label><input ng-init="user.accountTypeOption = 'Verify AD Password'" type="radio" ng-model="user.accountTypeOption" value="Verify AD Password"> Verify AD Password</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <div class="form-group" ng-class="{ 'has-error' : CreateUserForm.UserId.$invalid && !CreateUserForm.UserId.$pristine }">
+                                <label class="col-sm-4 control-label">User ID</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <input type="text" maxlength="20"
+                                               class="k-input k-textbox k-fill"
+                                               ng-model="user.UserId"
+                                               name="UserId"
+                                               ng-minlength="3"
+                                               ng-blur="changeUser(user.UserId,user.AccountType)"
+                                               required>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button" tooltip title="Add" ng-click="clearAll()" tooltip title="{{label.create}}"><i class="icon icon_plus"></i></button>
+                                            <button class="btn btn-default" type="button" ng-click="finderUserID.open()" tooltip title="{{label.search}}"><i class="icon icon_search"></i></button><!--data-toggle="modal" data-target="#modalUserId"-->
+                                        </span>
+                                    </div>
+                                    <p ng-show="CreateUserForm.UserId.$error.minlength" class="help-block">User ID is too Short</p>
+                                    <p ng-show="CreateUserForm.UserId.$error.pattern" class="help-block">User ID is Must Be Number</p>
+                                    <p ng-show="hasError(CreateUserForm.UserId, ErrorTypes.Required)" class="help-block">User ID is required.</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-class="{ 'has-error' : CreateUserForm.UserFullName.$invalid && !CreateUserForm.UserFullName.$pristine }">
+                                <label class="col-sm-4 control-label">User Name</label>
+
+                                <div class="col-sm-8">
+
+                                    <input type="text" name="UserFullName" maxlength="25" class="k-input k-textbox k-fill" ng-model="user.UserFullName" required />
+                                    <p ng-show="CreateUserForm.UserFullName.$invalid && !CreateUserForm.UserFullName.$pristine" class="help-block">UserName is required.</p>
+
+                                    <div class="checkbox" ng-class="{ 'has-error' : CreateUserForm.Inactive.$invalid && !CreateUserForm.Inactive.$pristine }">
+                                        <label><input type="checkbox" name="Inactive" ng-model="user.Inactive"> Inactive</label>
+                                        <p ng-show="CreateUserForm.Inactive.$invalid && !CreateUserForm.Inactive.$pristine" class="help-block">Please Select the Status.</p>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-class="{ 'has-error' : CreateUserForm.email.$invalid && !CreateUserForm.email.$pristine }">
+                                <label class="col-sm-4 control-label">Email</label>
+                                <div class="col-sm-8">
+                                    <input type="email" name="email" maxlength="60" class="k-input k-textbox k-fill" ng-model="user.email" >
+                                    <p ng-show="CreateUserForm.email.$invalid && !CreateUserForm.email.$pristine" class="help-block">Not a valid email!.</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group margin-bottom-0" ng-class="{ 'has-error' : hasError(CreateUserForm.MobileNo)}">
+                                <label class="col-sm-4 control-label">Mobile Number</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="MobileNo" sp-validation="integers" class="k-input k-textbox k-fill" pattern="\d{9}" ng-model="user.MobileNo" ng-maxlength="9" ng-minlength="9" >
+                                    <!--<p ng-show="CreateUserForm.MobileNo.$error.required && !CreateUserForm.MobileNo.$pristine" class="help-block">Not a valid Mobile Number!.</p>-->
+                                    <div ng-show="hasError(CreateUserForm.MobileNo)">
+                                        <p class="help-block" ng-show="hasError(CreateUserForm.MobileNo, ErrorTypes.integers)">
+                                            Not a valid Mobile Number!.
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+                            
+                            
+                           
+                                
+                                <div class="col-sm-8" ng-hide="true">
+                                    <input type="text" name="dhdhh" class="k-input k-textbox k-fill" pattern="\d{9}" ng-model="dbdshd">
+                                    
+                                </div>
+                       
+
+
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="widget">
+
+                    <div class="widget-title">System Authentication</div>
+
+                    <div class="widget-body" >
+
+                        <fieldset ng-hide="user.AccountType == 1">
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-4 col-sm-8">
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" ng-model="user.IsPwChangeNextLogin" /> Password need to change in next login.</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" ng-change="ClearPw()" ng-model="user.IsSysPwEmail" /> System Password (Email to user)</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </fieldset>
+
+                        <fieldset ng-hide="user.AccountType == 1">
+                            <div class="form-group margin-bottom-0" ng-class="{ 'has-error' : CreateUserForm.Password.$invalid && !CreateUserForm.Password.$pristine && user.AccountType == 0 }">
+                                <label class="col-sm-4 control-label">Password</label>
+                                <div class="col-sm-8">
+                                    <input type="password" class="k-input k-textbox k-fill" ng-disabled="user.IsSysPwEmail" ng-blur="PasswordCheckPasswordPolicy()" ng-model="user.password" name="Password" maxlength="30">
+                                    <!--<p ng-show="CreateUserForm.Password.$error.required  && !CreateUserForm.Password.$pristine" class="help-block">Password is required.</p>-->
+                                    <p ng-show="CreateUserForm.Password.$error.required  && !CreateUserForm.Password.$pristine && user.AccountType == 0" class="help-block">Password is required.</p>
+                                </div>
+                                
+                                <div class="col-sm-8" ng-hide="true">
+                                    <input type="password" value="qwe" class="k-input k-textbox k-fill" ng-disabled="user.IsSysPwEmail"  ng-model="user.password123" name="Password123" maxlength="30"> 
+                                </div>
+
+                            </div>
+                        </fieldset>
+
+                    </div>
+
+
+                </div>
+
+
+                
+            </div>
+        </div>
+
+        <div>
+            <button class="btn btn-primary" type="submit">Submit</button>
+            <button class="btn btn-default" type="reset" ng-click="CreateUserReset(user)">Reset</button>
+        </div>
+
+    </form>
+</div>
+
+<finder-new id="finderUserID"
+            title="{{finderUserID.title}}"
+            params="finderUserID.params"
+            info="finderUserID.info"
+            callback="finderUserID.callback"></finder-new>
+
+
+
+
+<finder-new id="finderGropID"
+            title="{{finderGropID.title}}"
+            params="finderGropID.params"
+            info="finderGropID.info"
+            callback="finderGropID.callback"></finder-new>
+
+

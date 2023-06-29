@@ -1,0 +1,13 @@
+<nav>
+    <ul>
+        <li ng-repeat="nav in navigation" ng-class="{'true':'active','false':'closed'}[nav.selected]" ng-if="nav.haveSubnav">
+            <a ng-click="nav.selected=!nav.selected"><i class="icon" ng-class="nav.icon"></i>{{nav.label}}</a>
+            <ul ng-if="nav.menu.length > 0">
+                <li ng-repeat="subnav in nav.menu" ng-if="checkPermission(subnav.permission)" ng-init="nav.selected=pathCheck(nav.base, subnav.path)">
+                    <a href="{{nav.base+subnav.path}}" ng-bind="subnav.text"></a>
+                </li>
+            </ul>
+        </li>
+     
+    </ul>
+</nav>

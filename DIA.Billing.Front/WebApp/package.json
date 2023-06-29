@@ -1,0 +1,31 @@
+{
+  "name": "dia.billing.front",
+  "version": "0.1.0",
+  "dependencies": {
+    "chalk": "~0.5.0",
+    "clean-css": "~2.2.0",
+    "gulp": "^3.9.1",
+    "maxmin": "~1.0.0",
+    "npm": "^6.13.4"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-clean": "~0.6.0",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-cssmin": "^0.10.0",
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-uglify": "~0.2.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-connect": "^4.2.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-plumber": "^1.2.1",
+    "gulp-uglify": "^1.5.4"
+  },
+  "description": "dialog billing app",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "thinira liyanage",
+  "license": "ISC"
+}

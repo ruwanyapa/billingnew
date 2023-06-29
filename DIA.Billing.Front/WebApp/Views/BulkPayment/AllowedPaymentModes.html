@@ -1,0 +1,53 @@
+﻿<h1 ng-bind="Title()"></h1>
+
+<div class="container">
+    <message ng-model="alertMessage"></message>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="widget">
+                <div class="widget-body">
+
+                    <form class="form-horizontal" novalidate>
+
+                        <div ng-class="" class="form-group">
+                            <label class="col-sm-5 control-label">DAP Outlet Type</label>
+                            <div class="col-sm-7">
+                                <select kendo-drop-down-list class="k-fill"
+                                        k-data-text-field="'text'"
+                                        k-data-value-field="'value'"
+                                        ng-model="AllowedPaymentMode.PaymentType"
+                                        k-data-source="DAPOutletTypeOption" ng-change="GetAllowedPayModesByDapOutletData()"></select>
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br /><br />
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="gridAllowedPaymentMode" tabindex="0"
+                                     kendo-grid="gridAllowedPaymentMode"
+                                     ng-init="InitA('gridAllowedPaymentMode')"
+                                     k-options="dgGridAllowedPaymentModes.options()">
+                                </div>
+                            </div>
+                        </div>
+
+                        <br /><br />
+                    </form>
+
+                </div>
+            </div>
+            <div>
+                <button class="btn btn-success" type="button" ng-click="PostAllowedPaymentModes()">Save</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,72 @@
+<div>
+    <ng-form name="frmPayVoucher">
+        <message ng-model="payAlertMessage" ng-hide ="true"></message>
+
+        <div class="form-group" ng-class="{ 'has-error' : hasError(frmPayVoucher.Code)}">
+            <label class="col-sm-4 control-label">Voucher Code</label>
+            <div class="col-sm-7">
+                <input type="text" name="Code" class="k-input k-textbox k-fill" ng-model="Voucher.Code" /><!--ng-readonly="true"-->
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" tooltip title="{{label.search}}" ng-click="VoFinderVoucher.open()"><i class="icon icon_search"></i></button>
+                </span>
+                <p ng-show="hasError(frmPayVoucher.Code, ErrorTypes.Required)" class="help-block">Voucher Code is required</p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Voucher Category</label>
+            <div class="col-sm-7">
+                <input type="text" name="Category" class="k-input k-textbox k-fill" ng-model="Voucher.Category.Text" ng-readonly="true" required/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Voucher Sub Category</label>
+            <div class="col-sm-7">
+                <input type="text" name="Category" class="k-input k-textbox k-fill" ng-model="Voucher.SubCategory.Text" ng-readonly="true" required/>
+            </div>
+        </div>
+           
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Voucher Amount</label>
+            <div class="col-sm-7">
+                <input type="text" name="Amount" class="k-input k-textbox k-fill" ng-model="Voucher.Amount" ng-readonly="true" required/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Expiring On</label>
+            <div class="col-sm-7">
+                <input type="text" name="ExpiringOn" class="k-input k-textbox k-fill" ng-model="Voucher.ExpiringOn" ng-readonly="true" required/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Sales Agent</label>
+            <div class="col-sm-7">
+                <input type="text" name="SalesAgent" class="k-input k-textbox k-fill" ng-model="Voucher.SalesAgent.Text" ng-readonly="true" required/>
+            </div>
+        </div>        
+
+        <div class="form-group">
+            <div class="col-sm-8 col-sm-offset-4">
+                <button type="button" class="btn btn-success" ng-click="SaveVoucher(frmPayVoucher)" ng-disabled="!Voucher.Code">Update</button>
+            </div>
+        </div>
+
+    </ng-form>
+</div>
+
+<!--<finder action="VoFinderVoucher"
+        id="modalVoucherId"
+        app-id="ZBC-DCPOS"
+        param="FinderParams"
+        ui-id="POS-PMT-VOUCHER-01"
+        title="Find Vouchers"
+        map-id="PMT-VOUCHER-01"></finder>-->
+<finder-new id="VoFinderVoucher"
+            title="{{VoFinderVoucher.title}}"
+            params="VoFinderVoucher.params"
+            info="VoFinderVoucher.info"
+            callback="VoFinderVoucher.callback"></finder-new>
+

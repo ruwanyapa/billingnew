@@ -1,0 +1,79 @@
+﻿<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addPayments" aria-hidden="true">
+    <div class="modal-dialog modal-lg" ng-init="submitData()">
+        <div class="modal-content">
+            <ng-form name="BillInvoicePaymentsForm" id="BillInvoicePaymentsForm" ng-hide="BillInvoicePaymentsForm.$submitted" ng-submit=" submitform()" ng-init="aa()">
+                <div class="modal-header">
+                    <message ng-model="alertMessage" ng-hide="true"></message>
+
+                    <button type="button" class="close" data-dismiss="modal" ng-click="changeAddPaymentPageState();"><span aria-hidden="true">&times;</span><span class="sr-only">OK</span></button>
+                    <h4 class="modal-title">Bill Invoice Payments</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="widget">
+                        <div class="widget-body">
+
+                            <table class="table scrolld">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 170px">Connection Reference</th>
+                                        <th style="width: 170px">Contract Number</th>
+                                        <th style="width: 170px">Amount</th>
+                                        <th style="width: 500px">Customer Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr id="template" ng-repeat="recode in rowItems">
+                                        <td style="width: 170px">
+                                            <input type="text" ng-model="recode.ConnectionReference" ng-readonly="true" class="k-input k-textbox k-fill text-left " />
+                                        </td>
+                                        <td style="width: 170px">
+                                            <input type="text" ng-model="recode.ContractNumber" ng-readonly="true" class="k-input k-textbox k-fill text-left" />
+                                        </td>
+                                        <td style="width: 170px">
+                                            <input type="number" ng-model="recode.Amount" ng-keydown="enterEvent(this,$event)" min="0.01" step="0.01" oninput="validity.valid||(value='');" class="k-input k-textbox k-fill text-left" ng-change="enterAmount()" id="amount" />
+                                        </td>
+                                        <td style="width: 500px">
+                                            <input type="text" ng-model="recode.CustomerName" ng-readonly="true" class="k-input k-textbox k-fill text-left " />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="modal-footer clearfix">
+                    <div>
+                        <br />
+                        <div id="cumilaltive" class="row">
+                            <div class="col-xs-2">
+                                <label>No. of Records</label>
+                            </div>
+                            <div class="col-xs-2">
+                                <input type="text" class="k-input k-textbox k-fill text-right" readonly="readonly" value="{{correctRecCount | number : fractionSize}}" />
+                            </div>
+                            <div class="col-xs-2">
+
+                            </div>
+                            <div class="col-xs-2">
+
+                            </div>
+                            <div class="col-xs-2">
+                                <label>Total Amount</label>
+                            </div>
+                            <div class="col-xs-2">
+                                <input type="text" class="k-input k-textbox k-fill text-right" value="{{totAmount | number : fractionSize}}" readonly="readonly" />
+                            </div>
+                        </div>
+                        <br />
+                    </div>
+                    <div>
+                        <button class="btn btn-primary" ng-click="submitData()">Submit</button>
+                    </div>
+                </div>
+            </ng-form>
+        </div>
+    </div>
+</div>

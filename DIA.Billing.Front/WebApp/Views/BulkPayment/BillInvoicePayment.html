@@ -1,0 +1,256 @@
+﻿<h1 ng-bind="Title()"></h1>
+
+<div class="container" ng-mousemove="UpdateDateTime()">
+
+    <message ng-model="alertMessage" ng-hide="true"></message>
+
+    <div class="tab-content widget">
+        <div style="padding:10px">
+            <div id="BulkEntry">
+                <form name="BulkEntryForm" class="form-horizontal" novalidate>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div ng-class="" class="form-group">
+                                <label class="col-sm-5 control-label">Batch ID</label>
+                                <div class="col-sm-7">
+                                    <div class="input-group">
+                                        <input type="text" class="k-input k-textbox k-fill" readonly="readonly" ng-model="BillInvoicePayment.BatchID" name="BatchId">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button" ng-click="BillInvoiceBatchID.open()" tooltip title="{{label.search}}"><i class="icon icon_search"></i></button>
+                                            <button class="btn btn-default" type="button" ng-click="changePageState('NEW')" tooltip title="{{label.create}}"><i class="icon icon_plus"></i></button>
+                                        </span>
+                                    </div>
+                                    <div ng-show="" class="ng-hide">
+                                        <p ng-show="" class="help-block ng-hide">
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-class="" class="form-group">
+                                <label class="col-sm-5 control-label">Receipt No</label>
+                                <div class="col-sm-7">
+                                    <input type="text" readonly="readonly"
+                                           class="k-input k-textbox k-fill" ng-model="BillInvoicePayment.ReceiptNo" name="BatchId">
+                                    <div ng-show="" class="ng-hide">
+                                        <p ng-show="" class="help-block ng-hide">
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-class="" class="form-group">
+                                <label class="col-sm-5 control-label">Account No</label>
+                                <div class="col-sm-7">
+                                    <input onfocus="if (this.value != '') { this.value = ''; }"
+                                           ng-focus="BillInvoicePayment.ConnectionReference=''"
+                                           ng-disabled="disabled.disableActiveFields || disabled.keyEnterFields"
+                                           value="value"
+                                           type="text"
+                                           ng-keypress="GetAccountNo($event)"
+                                           class="k-input k-textbox k-fill"
+                                           ng-model="BillInvoicePayment.AccountNo"
+                                           name="BatchId">
+                                    <div ng-show="" class="ng-hide">
+                                        <p ng-show="" class="help-block ng-hide">
+
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-class="" class="form-group">
+                                <label class="col-sm-5 control-label">Connection Reference</label>
+                                <div class="col-sm-7">
+                                    <input type="text"
+                                           onfocus="if (this.value != '') { this.value = ''; }"
+                                           ng-disabled="disabled.disableActiveFields || disabled.keyEnterFields"
+                                           ng-focus="BillInvoicePayment.AccountNo=''"
+                                           value="value"
+                                           ng-keypress="GetConnectionReference($event)"
+                                           class="k-input k-textbox k-fill" ng-model="BillInvoicePayment.ConnectionReference" name="BatchId">
+                                    <div ng-show="" class="ng-hide">
+                                        <p ng-show="" class="help-block ng-hide">
+
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-class="" class="form-group">
+                                <label class="col-sm-5 control-label">Cust Name</label>
+                                <div class="col-sm-7">
+                                    <input type="text"
+                                           class="k-input k-textbox k-fill" readonly="readonly" ng-model="BillInvoicePayment.CustName" name="BatchId">
+                                    <div ng-show="" class="ng-hide">
+                                        <p ng-show="" class="help-block ng-hide">
+
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <table class="table table-bordered  table-hover">
+                                <tbody>
+                                    <tr><th class="control-label">Batch Date and Time</th><td ng-bind="BillInvoicePayment.BatchDateandTime" class="ng-binding  text-right"></td></tr>
+                                    <tr><th class="control-label">Total Amount</th><td class="ng-binding  text-right">{{BillInvoicePayment.TotalAmount | number:2}}</td></tr>
+                                    <tr><th class="control-label">Receipt Status</th><td class="ng-binding  text-right">{{BillInvoicePayment.ReceiptStatus}}</td></tr>
+                                    <tr>
+                                        <th class="control-label">Remarks</th>
+                                        <td>
+                                            <textarea ng-model="BillInvoicePayment.Remarks"
+                                                      ng-disabled="disabled.disableActiveFields"
+                                                      ng-maxlength="500" name="Remarks" 
+                                                      class="k-input k-textbox k-fill ng-pristine ng-valid" 
+                                                      ng-blur="InheritRemarks()" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="dgBillInvoicePayment" tabindex="0"
+                                 kendo-grid="dgBillInvoicePayment"
+                                 ng-init="InitA('dgBillInvoicePayment')"
+                                 k-options="dgGridBillInvoicePayment.options()">
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div ng-class="" class="form-group">
+                                <label class="col-sm-5 control-label">Total Unsettled Amount</label>
+                                <div class="col-sm-7">
+                                    <input value="{{BillInvoicePayment.TotalUnsettledAmount | number:2}}" ng-readonly="true" name="TotalPayAmount" ng-click="SetPaymentMode()" type="text" class="k-input k-textbox k-fill ng-pristine ng-valid text-right">
+                                    <div ng-show=" " class=" ng-hide">
+                                        <p ng-show="" class="help-block ng-hide">
+
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-class="" class="form-group">
+                                <label class="col-sm-5 control-label">Additional Amount</label>
+                                <div class="col-sm-7">
+                                    <input value="{{BillInvoicePayment.AdditionalAmount | number:2}}" ng-readonly="true" name="TotalPayAmount" ng-click="SetPaymentMode()" type="text" class="k-input k-textbox k-fill ng-pristine ng-valid text-right">
+                                    <div ng-show=" " class=" ng-hide">
+                                        <p ng-show="" class="help-block ng-hide">
+
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div ng-class="" class="form-group">
+                                <label class="col-sm-5 control-label">Total Pay Amount</label>
+                                <div class="col-sm-7">
+                                    <input ng-model="BillInvoicePayment.TotalPayAmount"
+                                           name="TotalPayAmount"
+                                           ng-class="{'pending-delete': IsTotalPayAmountIncorrect}"
+                                           ng-change="CalculateAdditionalAmount()"
+                                           ng-disabled="disabled.disableActiveFields"
+                                           type="text"
+                                           class="k-input k-textbox k-fill ng-pristine ng-valid text-right">
+                                    <div ng-show=" " class=" ng-hide">
+                                        <p ng-show="" class="help-block ng-hide"></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div ng-class="" class="form-group">
+
+                                <label class="col-sm-5 control-label">Payment Mode</label>
+                                <div class="col-sm-7">
+
+                                    <select name=""
+                                            kendo-drop-down-list
+                                            k-placeholder="'Payment Mode'"
+                                            k-data-text-field="'Description'"
+                                            k-data-value-field="'Id'"
+                                            ng-change="SetPaymentMode()"
+                                            k-data-source="PaymentModeCollection"
+                                            ng-model="BillInvoicePayment.PaymentMode"
+                                            class="k-fill"
+                                            ng-disabled="disabled.disableActiveFields"></select><br /><br />
+
+                                    <input type="text" ng-disabled="true"
+                                           class="k-input k-textbox"
+                                           style="width:180px; padding-top:5px;"
+                                           name="ExistingReference"
+                                           ng-model="BillInvoicePayment.ExistingReference"
+                                           required>
+
+                                    <span>
+                                        <button class="btn btn-default" ng-disabled="disabled.disableActiveFields"
+                                                ng-click="findExistingRef.open()" ng-disabled="receipt.PaymentMode=='-- Select --'" type="button">
+                                            {{PaymentMode}}Exi.Ref.
+                                        </button><!--Existing Reference data-toggle="modal" data-target="#modalExistingRef"-->
+                                    </span>
+
+                                    <p ng-show="" class="help-block"></p>
+                                </div>
+                            </div>
+
+                            <!--{{IsTotalPayAmountIncorrect}} | {{IsBalanceIncorrect}}-->
+                            <div ng-class="" class="form-group" ng-show="((BillInvoicePayment.PaymentMode =='CA') && (BillInvoicePayment.TotalPayAmount > 0))">
+                                <label class="col-sm-5 control-label">Customer Paying Amount</label>
+                                <div class="col-sm-7">
+                                    <input onfocus="if (this.value != '') { this.value = ''; }"
+                                           type="text" ng-model="BillInvoicePayment.CustomerPayingAmount"
+                                           ng-disabled="disabled.disableActiveFields"
+                                           ng-change="CalculateBalance()" name="CustomerPayingAmount"
+                                           class="k-input k-textbox k-fill ng-pristine ng-valid text-right">
+                                    <div ng-show="" class="ng-hide">
+                                        <p ng-show="" class="help-block ng-hide"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-class="" class="form-group" ng-show="((BillInvoicePayment.PaymentMode =='CA') && (BillInvoicePayment.TotalPayAmount > 0))">
+                                <label class=" col-sm-5 control-label">
+                                    Balance 
+                                </label>
+                                <div class="col-sm-7">
+                                    <input type="text" value="{{ BillInvoicePayment.Balance | number:2}}" name="Balance" class="k-input k-textbox k-fill ng-pristine ng-valid text-right" disabled="disabled">
+                                    <div ng-show="" class="ng-hide">
+                                        <p ng-show="" class="help-block ng-hide">
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+                            <payment-mode options="Options"></payment-mode>
+                        </div>
+                    </div>
+                    <br />
+                    
+                    <button permission-code="'50100'" class="btn btn-danger" ng-disabled="disabled.CancelButton" type="button" ng-click="CancelSingleReceipt()">Cancel</button>
+                    <button permission-code="'50100'" class="btn btn-info" ng-disabled="disabled.PrintButton" type="button" ng-click="printReceipt()">Print</button>
+                    <button permission-code="'50100'" class="btn btn-primary" ng-disabled="disabled.SaveButton" type="button" ng-click="PostBillData()">Save</button>
+                    <br />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .pending-delete {
+        border-color: #ff768e;
+    }
+</style>
+
+<finder-new id="findBillInvoiceBatch"
+            title="{{BillInvoiceBatchID.title}}"
+            params="BillInvoiceBatchID.params"
+            info="BillInvoiceBatchID.info"
+            callback="BillInvoiceBatchID.callback"></finder-new>
+
+
+<finder-new id="findExistingRef"
+            title="{{findExistingRef.title}}"
+            params="findExistingRef.params"
+            info="findExistingRef.info"
+            callback="findExistingRef.callback"></finder-new>

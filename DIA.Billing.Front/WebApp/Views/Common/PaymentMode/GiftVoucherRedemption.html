@@ -1,0 +1,39 @@
+<div>
+
+    <message ng-model="payAlertMessage" ng-hide ="true"></message>
+
+    <fieldset>
+
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Voucher Serial Number</label>
+            <div class="col-sm-7">
+                <div class="input-group">
+                    <input type="text" ng-keyup="ChangeGiftVoucher($event)" name="VoucherSerialNumber" class="k-input k-textbox k-fill" ng-model="GiftVoucher.Code"><!--sp-validation="number"-->
+                    <span class="input-group-btn">
+                        <button class="btn btn-info btn-sm" ng-click="GfAddVoucher()" ng-disabled="!GiftVoucher.Code">Add</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div id="GfVouchers"
+             kendo-grid="GfVouchers"
+             k-options="GfDgGrid.options()"
+             ng-init="GfInit('GfVouchers')">
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-sm-3 col-sm-offset-4 control-label">Total</label>
+            <div class="col-sm-5">
+                <input type="text" class="k-input k-textbox k-fill" ng-readonly="true" ng-model="GiftVoucher.Total">
+            </div>
+        </div>
+
+    </fieldset>
+
+
+    <div>
+        <button type="button" class="btn btn-success" ng-disabled="disabled.gvbutton" ng-click="SaveGfVouchers()">Update</button>
+    </div>
+</div>

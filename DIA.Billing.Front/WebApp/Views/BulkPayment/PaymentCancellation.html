@@ -1,0 +1,459 @@
+﻿<h1 ng-bind="Title()"></h1>
+
+<div class="container" ng-mousemove="UpdateDateTime()">
+
+
+
+
+    <div class="widget">
+        <div class="widget-body">
+
+            <form class="form-horizontal" novalidate>
+
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <div ng-class="" class="form-group">
+                            <label class="col-sm-5 control-label">Cancellation Batch ID</label>
+                            <div class="col-sm-7">
+
+                                <div class="input-group">
+                                    <input type="text" ng-model="payCancel.BathId" ng-blur="GetByBatchId()" class="k-input k-textbox k-fill" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button" ng-click="CancelBatchFinder.open()" tooltip title="{{label.search}}"><i class="icon icon_search"></i></button>
+                                        <button class="btn btn-default" type="button" ng-click="clearForm()" tooltip title="{{label.create}}"><i class="icon icon_plus"></i></button>
+                                    </span>
+                                </div>
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+
+                                    </p>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                        <div>
+                            <div class="radio-group">
+
+                                <div ng-class="" class="form-group">
+                                    <div class="col-sm-5 control-label">
+                                        <label class="radio-inline  pull-left" ng-init="payCancel.CancellationRadio = '0' ">
+                                            <input ng-disabled="payCancel.BathId  || CancelTypeDisabled" type="radio" ng-click="RadioChange()" ng-model="payCancel.CancellationRadio" name="Cancellation" value="0" class="ng-valid ng-pristine">
+                                            Cancellation Type
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-7">
+
+                                        <select kendo-drop-down-list
+                                                required
+                                                class="k-fill"
+                                                k-data-text-field="'text'"
+                                                k-data-value-field="'value'"
+                                                ng-model="payCancel.cancelType"
+                                                k-data-source="OptionsCancellationType"
+                                                ng-disabled="payCancel.CancellationRadio !=0"></select>
+                                    </div>
+
+
+
+                                </div>
+
+
+                                <div ng-class="" class="form-group" ng-disabled="payCancel.BathId">
+                                    <div class="col-sm-5 control-label">
+                                        <label class="radio-inline  pull-left">
+                                            <input ng-disabled="payCancel.BathId || CancelTypeDisabled" type="radio" ng-click="RadioChange()" ng-model="payCancel.CancellationRadio" name="Cancellation" value="1" class="ng-valid ng-pristine">
+                                            Bulk Upload
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <div class="input-group ">
+                                            <input ng-disabled="payCancel.CancellationRadio != 1" name="attachFile" multiple style="width:100%"
+                                                   type="file" class="btn"
+                                                   file-model="myFile" />                                                    <span class="input-group-btn">
+                                                <button data-toggle="modal" ng-disabled="payCancel.CancellationRadio != 1" class="btn btn-success btn-sm" ng-click="uploadDocuments()" type="button">Load</button>
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+
+
+                                </div>
+
+
+                                <div ng-class="" class="form-group">
+                                    <div class="col-sm-5 control-label pull-left">
+                                        <label class="radio-inline  pull-left">
+                                            <input ng-disabled="payCancel.BathId  || CancelTypeDisabled" type="radio" ng-click="RadioChange()" ng-model="payCancel.CancellationRadio" name="Cancellation" value="2" class="ng-pristine ng-valid">
+                                            Batch Cancellation
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-7">
+
+                                        <div class="input-group ">
+                                            <input type="text" ng-disabled="payCancel.CancellationRadio != 2" class="k-input k-textbox k-fill" ng-model="payCancel.CancellationBatch" ng-blur="GetReceiptsByBatch()" />
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default" ng-disabled="payCancel.CancellationRadio != 2" type="button" ng-click="ReceiptBatchFinder.open()" tooltip title="{{label.search}}"><i class="icon icon_search"></i></button>
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div ng-show="" class="ng-hide">
+
+                                        <p ng-show="" class="help-block ng-hide">
+
+                                        </p>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Cancellation Reason Code</label>
+                            <div class="col-sm-7">
+
+                                <select kendo-drop-down-list class="k-fill"
+                                        k-placeholder="'Select '"
+                                        k-data-text-field="'Description'"
+                                        k-data-value-field="'Id'"
+                                        k-data-source="cancellattonCode"
+                                        ng-model="payCancel.cancelCode"
+                                        ng-disabled="payCancel.BathId"></select>
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Cancellation Reason Descript.</label>
+                            <div class="col-sm-7">
+
+                                <select kendo-drop-down-list class="k-fill"
+                                        k-placeholder="'Select '"
+                                        k-data-text-field="'Description'"
+                                        k-data-value-field="'Id'"
+                                        k-data-source="CancellationDesc"
+                                        ng-model="payCancel.CancelDesc"
+                                        ng-disabled="payCancel.BathId"></select>
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Mistake Done By</label>
+                            <div class="col-sm-7">
+
+                                <select kendo-drop-down-list
+                                        required
+                                        class="k-fill"
+                                        k-data-text-field="'text'"
+                                        k-data-value-field="'value'"
+                                        k-data-source="OptionsMistakeDoneBy"
+                                        ng-model="payCancel.OptionsMistakeDoneBy"
+                                        ng-disabled="payCancel.BathId"></select>
+
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">Cancellation Remarks</label>
+                            <div class="col-sm-7">
+
+                                <textarea class="k-fill k-textbox" ng-model="payCancel.CancelRemark" ng-disabled="payCancel.BathId"></textarea>
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <span class="input-group-btn">
+                            <button data-toggle="modal" ng-disabled="payCancel.CancellationRadio == 1" class="btn btn-success btn-sm" ng-click="loadReceipts()" type="button">Load Cancelling Receipt</button>
+                        </span>
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <table class="table table-bordered table-condensed  table-hover">
+
+                            <tbody>
+                                <tr><td width="60%">Batch Date &amp; Time</td><td ng-bind="payCancel.time" class="ng-binding  text-right"></td></tr>
+                                <tr><td>Workflow Ref</td><td ng-bind="payCancel.WorkflowReference" class="ng-binding  text-right"></td></tr>
+                                <tr><td>Workflow Status</td><td ng-bind="payCancel.status" class="ng-binding  text-right"></td></tr>
+                                <tr><td>Toatal Amount Cancelling</td><td class="ng-binding  text-right">{{payCancel.Canceltotal | number:2}}</td></tr>
+                                <tr><td>Transferred To</td><td ng-bind="payCancel.ConrefTransfer" class="ng-binding  text-right"></td></tr>
+                                <tr><td>App/Reject Reason</td><td ng-bind="payCancel.RejectReason" class="ng-binding  text-right"></td></tr>
+                            </tbody>
+                        </table>
+
+
+
+
+                        <div class="well well-md">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label class="checkbox"><input type="checkbox" ng-model="payCancel.originalReceipt" />Original Receipt</label>
+                                    <label class="checkbox"><input type="checkbox" ng-model="payCancel.PayTransForm" />Payment Transfer Form</label>
+                                    <label class="checkbox"><input type="checkbox" ng-model="payCancel.Email" />Email</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="checkbox"><input type="checkbox" ng-model="payCancel.NicCopy" />NIC Copy</label>
+                                    <label class="checkbox"><input type="checkbox" ng-model="payCancel.ReqLetter" />Customer Request Letter</label>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <label class="col-sm-5 control-label">Reference <span class="label label-success" ng-model="IsAttach" ng-bind="IsAttach" ng-class="{'YES':'label-success', 'NO':'label-default'}[IsAttach]"></span></label>
+                                <div class="col-sm-7">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" ng-disabled="IsAttach=='NO'" data-target="#ReferenceViewRemoveAttachments">View / Remove</button>
+                                        <button type="button" class="btn btn-primary  btn-sm" data-toggle="modal" ng-disabled="disabled.Attachment" data-target="#ReferenceAddAttachments">Add</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+
+
+
+                    </div>
+
+                </div>
+
+                <br />
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5>Cancelling Receipt Details</h5>
+                        <div id="dgGridCancelReceiptDetails1" tabindex="0"
+                             kendo-grid="dgGridCancelReceiptDetails1"
+                             ng-init="InitA('dgGridCancelReceiptDetails1')"
+                             k-options="dgGridCancelReceiptDetails.options()">
+                        </div>
+
+                    </div>
+
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-7"></div>
+                    <div class="col-md-5 pull-right">
+
+                        <div ng-class="" class="form-group">
+                            <label class="col-sm-7 control-label">Total Amount</label>
+                            <div class="col-sm-5">
+
+                                <input type="text" class="k-input k-textbox k-fill ng-pristine ng-valid ng-empty ng-touched" ng-model="payCancel.Canceltotal" name="total" readonly="readonly">
+
+                                <div ng-show="" class="ng-hide">
+                                    <p ng-show="" class="help-block ng-hide">
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div ng-show="payCancel.cancelType == 1" class="col-md-12 ng-cloak">
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5>Correct Entry Details</h5>
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+
+
+                            <button class="btn btn-primary btn-sm" ng-disabled="payCancel.BathId" type="button" ng-click="ReceiptFinder.open()" tooltip title="{{label.search}}">Find (Pre Paid)</button>
+
+                            <button class="btn btn-info btn-sm" ng-disabled="payCancel.BathId" type="button" ng-click="PostPaidReceipts.open()" tooltip title="{{label.search}}">Find (Post Paid)</button>
+
+
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div id="dgGridCorrectEntryDetails1" tabindex="0"
+                                 kendo-grid="dgGridCorrectEntryDetails1"
+                                 ng-init="InitB('dgGridCorrectEntryDetails1')"
+                                 k-options="dgGridCorrectEntryDetails.options()">
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-7"></div>
+                        <div class="col-md-5 pull-right">
+
+                            <div ng-class="" class="form-group">
+                                <label class="col-sm-7 control-label">Total Amount</label>
+                                <div class="col-sm-5">
+
+                                    <input type="text" class="k-input k-textbox k-fill" ng-model="payCancel.CorrectEntrytotal" name="CorrectEntrytotal" readonly="readonly">
+
+                                    <div ng-show="" class="ng-hide">
+                                        <p ng-show="" class="help-block ng-hide">
+
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <br />
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button permission-code="'50103'" class="btn btn-primary" ng-click="SubmitCancellation()" ng-disabled="payCancel.BathId" type="button">Save</button>
+                    </div>
+                </div>
+
+
+            </form>
+
+        </div>
+    </div>
+
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="PinVerificationDetails" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!--<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
+                <h4 class="modal-title" id="myModalLabel">PIN Approval</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="widget">
+                    <div class="widget-body">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Workflow Id</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="WorkflowId" class="k-input k-textbox k-fill" ng-disabled="true" ng-model="payCancel.WorkFlowId">
+                            </div>
+
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Approver</label>
+                            <div class="col-sm-9">
+                                <select kendo-drop-down-list
+                                        required class="k-fill"
+                                        ng-disabled="disabled.PinRequestUsers"
+                                        ng-model="payCancel.PinRequestUsers"
+                                        k-data-text-field="'ApprovalUser'"
+                                        k-data-value-field="'ApprovalId'"
+                                        k-data-source="PinRequestUsers"></select><!--ng-change="loadEntryType()"-->
+
+                                <p ng-show="" class="help-block"></p>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">PIN</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="PinNo" class="k-input k-textbox k-fill" ng-disabled="payCancel.IsDisabledResend" ng-model="payCancel.PinNo">
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label"></label>
+                            <div class="col-sm-7">
+                                <label class="btn btn-link" ng-disabled="payCancel.IsDisabledResend" ng-click="ReSendPinRequest()">Resend PIN</label>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <br />
+                            <div class="col-sm-7" style="float: right">
+                                <button class="btn btn-primary" type="submit" name="SendPIN" ng-disabled="payCancel.IsDisabledSendPIN"
+                                        ng-model="payCancel.SendPin" ng-click="SendPinRequest()">
+                                    Send PIN
+                                </button>&nbsp;&nbsp;
+
+                                <button class="btn btn-success" type="submit" name="VerifyPIN" ng-disabled="payCancel.IsDisabledVerifyPIN"
+                                        ng-model="payCancel.VerifyPin" ng-click="VerifyPinRequest()">
+                                    Verfiy PIN
+                                </button>&nbsp;&nbsp;
+                                <button class="btn btn-danger" type="submit" name="DiscardPIN"
+                                        ng-model="payCancel.DiscardPin" ng-click="DiscardPinRequest()">
+                                    Discard
+                                </button>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<reference options="referenceParams" callback="referenceCallback"></reference>
+
+<finder-new id="CancelBatchFinder"
+            title="{{CancelBatchFinder.title}}"
+            params="CancelBatchFinder.params"
+            info="CancelBatchFinder.info"
+            callback="CancelBatchFinder.callback"></finder-new>
+
+<finder-new id="PostPaidReceipts"
+            title="{{PostPaidReceipts.title}}"
+            params="PostPaidReceipts.params"
+            info="PostPaidReceipts.info"
+            callback="PostPaidReceipts.callback"></finder-new>
+
+<finder-new id="ReceiptFinder"
+            title="{{ReceiptFinder.title}}"
+            params="ReceiptFinder.params"
+            info="ReceiptFinder.info"
+            callback="ReceiptFinder.callback"></finder-new>
+
+<finder-new id="ReceiptBatchFinder"
+            title="{{ReceiptBatchFinder.title}}"
+            params="ReceiptBatchFinder.params"
+            info="ReceiptBatchFinder.info"
+            callback="ReceiptBatchFinder.callback"></finder-new>

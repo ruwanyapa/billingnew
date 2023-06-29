@@ -1,0 +1,164 @@
+﻿<!doctype html>
+<html data-ng-app="DialogBilling" data-ng-controller="MainController">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-ng-bind="HeadTitle()"></title>
+
+    <link rel="icon" type="image/png" href="Images/favicon.png">
+    <link rel="icon" type="image/vnd.microsoft.icon" href="Images/favicon.ico">
+
+    <link rel="stylesheet" href="Content/login.css" />
+    <link rel="stylesheet" href="Content/loading-bar.css" />
+    <link rel="stylesheet" href="Content/kendo/2014.1.528/kendo.common.min.css" />
+    <link rel="stylesheet" href="Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="Content/kendo/2014.1.528/kendo.dataviz.min.css" />
+    <link rel="stylesheet" href="Content/kendo/2014.1.528/kendo.metro.min.css" />
+    <link rel="stylesheet" href="Content/kendo/2014.1.528/kendo.dataviz.metro.min.css" />
+    <link rel="stylesheet" href="Content/elegent-icon.css" />
+    <link rel="stylesheet" href="Content/form.css" />
+    <link rel="stylesheet" href="Content/widgets.css" />
+    <link rel="stylesheet" href="Content/nav.css" />
+    <link rel="stylesheet" href="Content/logo-topbar-breadcrumb.css" />
+    <link rel="stylesheet" href="Content/Site.css" />
+    <link rel="stylesheet" href="Content/message.css" />
+    <link rel="stylesheet" href="Content/hotkeys.css" />
+    <link rel="stylesheet" href="Content/field-minify.css" />
+    <link href="Scripts/angularJS/toaster.min.css" rel="stylesheet" />
+
+</head>
+<body data-ng-cloak>
+    <div data-ng-if="isLoggedIn()"
+         id="kendo-splitter"
+         kendo-splitter
+         k-panes="panes"
+         k-orientation="'horizontal'"
+         k-rebind="panes">
+
+        <aside>
+            <header><a class="product-logo" href="#/dashboard"></a></header>
+            <navigation />
+            <!--<nav><ul><li ng-repeat="nav in navigation" ng-class="{'true':'active','false':'closed'}[nav.selected]"><a ng-click="nav.selected=!nav.selected"><i class="icon" ng-class="nav.icon"></i>{{nav.label}}</a><ul ng-if="nav.menu.length > 0"><li ng-repeat="subnav in nav.menu"><a href="{{nav.base+subnav.path}}" ng-bind="subnav.text"></a></li></ul></li></ul></nav>-->
+            <footer>
+                <div class="zillione-logo"><a href="http://www.zillione.com/" target="_blank">Zillione Business Solutions</a></div>
+                <div class="links"><a href="">About</a><a href="">Settings</a><a href="">Help</a></div>
+                <div class="copy"> 2014 Dialog, All Rights Reserved.</div>
+                <div class="text-center"><a class="we" href="">a Zillion Product</a></div>
+            </footer>
+        </aside>
+
+        <main>
+            <toaster-container></toaster-container>
+            <div class="top-bar">
+                <div class="pull-left">
+                    <span class="menu-icon" ng-click="togglePanal()"><i class="icon icon_menu"></i></span>
+                </div>
+                <div class="pull-right bar-settings dropdown">
+                    <a role="button" class="account" data-toggle="dropdown" id="dropdownMenu1">{{userInfo().userName}} <span> @ {{userInfo().outletDescription}}</span></a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="#/UserManagement/ChangePassword">Change Password</a></li>
+                        <li class="divider"></li>
+                        <li><a data-ng-click="logoutUser()">Log Out</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div data-ng-view></div>
+        </main>
+    </div>
+
+
+    <script src="Scripts/angularJS/jquery-1.12.3.min.js"></script>
+    <script src="Scripts/kendo/2014.1.528/jquery.min.js"></script>
+    <script src="Scripts/kendo/2014.1.528/kendo.all.min.js"></script>
+    <script src="Scripts/kendo/2014.1.528/kendo.aspnetmvc.min.js"></script>
+    <script src="Scripts/kendo.modernizr.custom.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <script src="Scripts/respond.js"></script>
+
+    <!--<script src="Scripts/app/MinifiedJS/MinifiedAngularJS.min.js"></script>-->
+
+    <script src="Scripts/angularJS/angular.js"></script>
+    <script src="Scripts/angularJS/angular-route.min.js"></script>
+    <script src="Scripts/angularJS/angular-animate.min.js"></script>
+    <script src="Scripts/angularJS/angular-sanitize.min.js"></script>
+    <script src="Scripts/angularJS/angular-cookies.min.js"></script>
+    <script src="Scripts/angularJS/angular-kendo.min.js"></script>
+    <script src="Scripts/angularJS/hotkeys.js"></script>
+    <script src='Scripts/angularJS/textAngular/textAngular-sanitize.js'></script>
+    <script src='Scripts/angularJS/textAngular/textAngularSetup.js'></script>
+    <script src='Scripts/angularJS/textAngular/textAngular.js'></script>
+    <script src="Scripts/angularJS/loading-bar.js"></script>
+    <link href="Scripts/angularJS/toaster.min.css" rel="stylesheet" />
+    <script src="Scripts/angularJS/toaster.min.js"></script>
+   
+
+    <script src="Scripts/app/MinifiedJS/app-scriptsALL.min.js"></script>
+
+    <script src="Scripts/app/Common/appConstant.js"></script>
+    <script src="Scripts/app/Common/Services/AuthService.js"></script>
+
+    <script src="Scripts/app/BulkPayment/app.js"></script>
+    <script src="Scripts/app/BulkPayment/Controllers/BulkPaymentController.js"></script>
+
+    <script src="Scripts/app/AppNavigation/app.js"></script>
+    <script src="Scripts/app/AppNavigation/DiaBillingNav.js"></script>
+
+    <script src="Scripts/app/BulkPayment/Services/BulkPaymentService.js"></script>
+    <script src="Scripts/app/BulkPayment/Services/PaymentInqueryService.js"></script>
+    <!--<script src="Scripts/app/BulkPayment/Controllers/addPayments.js"></script>
+    <script src="Scripts/app/BulkPayment/Controllers/bulkExcelVerification.js"></script>-->
+    <script src="Scripts/app/BulkPayment/Controllers/paymentMode.js"></script>
+    <script src="Scripts/app/BulkPayment/Controllers/Helpers.js"></script>
+    <script src="Scripts/app/BulkPayment/Controllers/ForcefulRealizationOfChequeController.js"></script>
+
+    <script src="Scripts/app/BulkPayment/Services/ForcefulRealizationOfChequeService.js"></script>
+    <script src="Scripts/app/BulkPayment/Controllers/ChequeReturnController.js"></script>
+
+    <script src="Scripts/app/BulkPayment/Controllers/ChequeReturnController.js"></script>
+
+    <script src="Scripts/app/BulkPayment/Controllers/PaymentCancellationController.js"></script>
+    <script src="Scripts/app/BulkPayment/Services/PaymentCancellationService.js"></script>
+    <script src="Scripts/app/BulkPayment/Controllers/PaymentInquiryController.js"></script>
+    <script src="Scripts/app/BulkPayment/Controllers/PaymentTransferController.js"></script>
+    <script src="Scripts/app/BulkPayment/Services/PaymentTransferService.js"></script>
+    <script src="Scripts/app/BulkPayment/Services/ChequeReturnService.js"></script>
+
+    <script src="Scripts/app/BulkPayment/Controllers/TransferLogicController.js"></script>
+    <script src="Scripts/app/BulkPayment/Services/TransferLogicService.js"></script>
+
+    <script src="Scripts/app/BulkPayment/Controllers/PaymentMethodController.js"></script>
+    <script src="Scripts/app/BulkPayment/Services/PaymentMethodService.js"></script>
+    <script src="Scripts/app/BulkPayment/Controllers/PaymentSourceController.js"></script>
+    <script src="Scripts/app/BulkPayment/Services/PaymentSourceService.js"></script>
+    <script src="Scripts/app/BulkPayment/Controllers/PaymentTypeController.js"></script>
+    <script src="Scripts/app/BulkPayment/Services/PaymentTypeService.js"></script>
+    <script src="Scripts/app/BulkPayment/Controllers/ProductCategoryController.js"></script>
+    <script src="Scripts/app/BulkPayment/Services/ProductCategoryService.js"></script>
+    <script src="Scripts/app/BulkPayment/Controllers/ProductTypeController.js"></script>
+    <script src="Scripts/app/BulkPayment/Services/ProductTypeService.js"></script>
+    <script src="Scripts/app/BulkPayment/Controllers/SuspenseAccountConfigController.js"></script>
+    <script src="Scripts/app/BulkPayment/Services/SuspenseAccountConfigService.js"></script>
+    <script src="Scripts/app/BulkPayment/Controllers/TransferProductController.js"></script>
+    <script src="Scripts/app/BulkPayment/Services/TransferProductService.js"></script>
+    <script src="Scripts/app/BulkPayment/Controllers/AllowedPaymentModesController.js"></script>
+    <script src="Scripts/app/BulkPayment/Services/AllowedPaymentModesService.js"></script>
+    <script src="Scripts/app/BulkPayment/Controllers/CancellationTransferReasonsController.js"></script>
+    <script src="Scripts/app/BulkPayment/Services/CancellationTransferReasonsService.js"></script>
+    <script src="Scripts/app/BulkPayment/Controllers/ChequeReturnReasonsController.js"></script>
+    <script src="Scripts/app/BulkPayment/Services/ChequeReturnReasonsService.js"></script>
+
+    <script src="Scripts/app/Common/Other/qzPrint/rsvp-3.1.0.min.js"></script>
+    <script src="Scripts/app/Common/Other/qzPrint/sha-256.min.js"></script>
+    <script src="Scripts/app/Common/Other/qzPrint/qz-tray.js"></script>
+
+    <script src="Scripts/app/Common/appPrintingConstant.js"></script>
+    <script src="Scripts/app/BulkPayment/Controllers/BulkReceiptPrintingController.js"></script>
+    <script src="Scripts/app/BulkPayment/Services/ReceiptPrintingService.js"></script>
+
+    <script src="Scripts/app/BulkPayment/Controllers/BillInvoicePaymentController.js"></script>
+    <script src="Scripts/app/BulkPayment/Services/BillInvoicePaymentService.js"></script>
+
+    <script src="Scripts/app/BulkPayment/Controllers/BatchProcessPaymentsController.js"></script>
+    <script src="Scripts/app/BulkPayment/Services/BatchProcessPaymentsService.js"></script>
+</body>
+</html>

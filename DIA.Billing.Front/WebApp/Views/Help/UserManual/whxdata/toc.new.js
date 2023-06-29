@@ -1,0 +1,4 @@
+(function() {
+var toc =  [ { "type" : "book", "name" : "General", "key" : "toc1" }, { "type" : "book", "name" : "Bulk Payment", "key" : "toc2" }, { "type" : "book", "name" : "Payment Inquiry", "key" : "toc3" }, { "type" : "book", "name" : "Payment Cancellation", "key" : "toc4" }, { "type" : "book", "name" : "Payment Transfer", "key" : "toc5" }, { "type" : "book", "name" : "Forceful Realization Of Cheque", "key" : "toc6" }, { "type" : "book", "name" : "Cheque Return", "key" : "toc7" }, { "type" : "book", "name" : "Bulk Receipt Printing", "key" : "toc8" } ];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

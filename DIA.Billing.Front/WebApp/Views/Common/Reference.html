@@ -1,0 +1,89 @@
+<div><!-- Add Attachments -->
+    <div class="modal fade" id="ReferenceAddAttachments" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Add Attachments</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="widget">
+                        <div class="widget-body form-horizontal">
+                            <fieldset>
+                                
+                                <!--<message ng-model="alertMessagePopup"></message>-->
+                                
+                                <div class="form-group">
+                                    <label class="col-sm-5 control-label">Transaction Reference</label>
+                                    <div class="col-sm-7">
+                                        <div class="input-group">
+                                            <input type="text" name="TransRef" ng-model="TransReference.TrasnsactionReference" class="k-input k-textbox k-fill" readonly>
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default" type="button" ng-click="clearAttachedFile()" tooltip title="{{label.create}}"><i class="icon icon_plus"></i></button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-class="{ 'has-error' : ReferenceAddAttachments.UploadFile.$invalid && !ReferenceAddAttachments.UploadFile.$pristine }">
+                                    <label class="col-sm-5 control-label">Upload File</label>
+                                    <div class="col-sm-7">
+                                        <input multiple
+                                               type="file"
+                                               id="file" name="file"
+                                               file-model="myFile" onchange="angular.element(this).scope().getFileDetails(this)" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-5 control-label">Remarks</label>
+                                    <div class="col-sm-7">
+                                        <textarea name="Remarks" class="k-input k-textbox k-fill " rows="3" ng-model="Reference.Remarks"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-7 col-sm-offset-5">
+                                        <label class="checkbox-inline"><input type="checkbox" ng-model="Reference.AttachWorkflow" ng-checked="true" ng-disabled="true"/> Assign to workflow</label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <!--<button type="reset" class="btn btn-danger">Upload</button>-->
+                    <button type="button" class="btn btn-primary" ng-click="uploadDocuments()" ng-disabled="">Upload</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<!-- View / Remove Attachments -->
+<div class="modal fade" id="ReferenceViewRemoveAttachments" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">View / Remove Attachments</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        
+                        
+                    </div>
+                </div>
+                <div id="dgAttachedFile"
+                     kendo-grid="dgAttachedFile"
+                     k-options="dgGrid.options()"
+                     ng-init="Init('dgAttachedFile')">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>

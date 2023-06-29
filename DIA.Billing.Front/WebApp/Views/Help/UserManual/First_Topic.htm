@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ <meta name="generator" content="Adobe RoboHelp 2015" />
+<title>First Topic</title>
+<link rel="stylesheet" href="default.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="template/scripts/common.min.js"></script>
+<script type="text/javascript" src="template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="template/scripts/constants.js"></script>
+<script type="text/javascript" src="template/scripts/utils.js"></script>
+<script type="text/javascript" src="template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="template/scripts/mhver.js"></script>
+<script type="text/javascript" src="template/scripts/settings.js"></script>
+<script type="text/javascript" src="template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = ".";
+gCommonRootRelPath = ".";
+gTopicId = "";
+</script>
+</head>
+
+<body>
+<script type="text/javascript" src="./ehlpdhtm.js"></script>
+
+<p style="font-weight: bold; font-size: 18pt;">Random Bill Payment Radio 
+ Option</p>
+<p>&#160;</p>
+<ol style="list-style: decimal;">
+	<li>Select the &#160;BU and Product Category (Default value for Product 
+	 Category is 'CCBS' and for BU is ‘All’)</li>
+	<li>Select the ‘Random Bill Payment’ radio button </li>
+	<li>Then a separate pop-up will be opened. This pop-up will have a 
+	 grid with four columns (Connection Reference, Contract Number, Amount 
+	 and Reference Number).</li>
+	<li>User can key-in connection reference (or Contract Number), Pay 
+	 amount and Reference Number (Cargils/Keels receipt No) to the relevant 
+	 cells in the grid. Upon pressing enter key, cursor will move across 
+	 the cells.&#160;However cursor will not move to ‘Reference Number’ 
+	 cell. User will have to manually point the cursor to that cell if 
+	 they want.</li>
+	<li>Upon keying in records 'No of record' field and 'Total Amount' 
+	 field will update automatically</li>
+	<li>Finally user have to click on submit button to pass keyed-in data 
+	 to the Payment Entry GUI</li>
+</ol>
+<p>&#160;</p>
+<p style="margin-left: 40px;"><span style="font-weight: bold;">Special 
+ Note:</span> </p>
+<ul style="list-style: disc;">
+	<li><p style="margin-left: 40px;">Always red color row should not contain 
+	 any data. Data in the red color raw will not be submitted to the Payment 
+	 Entry GUI.</p></li>
+</ul>
+<p>&#160;</p>
+<ol start="7" style="list-style: decimal;">
+	<li><p>Upon submitting, connection reference/contract number will be 
+	 verified and if verification is success additional details such as 
+	 customer name, BU, Customer ID and etc will be shown in the main grid. 
+	 </p></li>
+</ol>
+<p style="margin-left: 40px;">&#160;</p>
+<p style="margin-left: 40px;"><span style="font-weight: bold;">Special 
+ Notes:</span> </p>
+<ul style="list-style: disc;">
+	<li><p style="margin-left: 40px;">If user has keyed-in an invalid number, 
+	 then those will be hi-lighted and shown. User can edit the number 
+	 and validate it again by clicking on CRM button.</p></li>
+	<li><p style="margin-left: 40px;">If user has keyed-in a pre-paid number, 
+	 upon validating that particular number will be highlighted and shown. 
+	 System will not facilitate taking payments to prepaid numbers.</p></li>
+</ul>
+<p style="margin-left: 40px;">&#160;</p>
+<ol start="8" style="list-style: decimal;">
+	<li><p>If user wants they can retrieve more details from RBM, PE, OCS 
+	 and Other systems by clicking on respective line-wise button (to retrieve 
+	 details of one number) or bulk buttons (to retrieve details for all 
+	 the numbers). </p></li>
+	<li><p>If user wants he/she will be able to attach a file or add remarks 
+	 to that particular batch he/she is creating. </p></li>
+</ol>
+<p>&#160;</p>
+<p style="margin-left: 40px;"><span style="font-weight: bold;">Special 
+ Notes:</span> </p>
+<ul style="list-style: disc;">
+	<li><p style="margin-left: 40px;">If user adds a remark to the Remark 
+	 field in ‘batch summary’ widget, then that same remark will be reflected 
+	 in the Remark column in the grid. However if user wants to add a custom 
+	 remark to one record he/she will be able to edit that respective cell 
+	 and add a custom remark.</p></li>
+</ul>
+<p style="margin-left: 40px;">&#160;</p>
+<ol start="8" style="list-style: decimal;">
+	<li><p>Then user can select the relevant records he/she wants to submit</p></li>
+	<li><p>Then user has to select the payment mode from the dropdown</p></li>
+	<li><p>Finally user will click on ‘save’ button to submit the data</p></li>
+	<li><p>Upon saving receipt numbers will be generated and saved details 
+	 will be loaded to Receipt Details Tab</p></li>
+	<li><p>If necessary user can print receipt individually or bulk-wise</p></li>
+</ol>
+</body>
+</html>

@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc.js\"  name=\"Payment Inquiry\"><item name=\"Query from Billing System\" url=\"Query_from_Billing_System.htm\" /><item name=\"Query from PE\" url=\"Query_from_PE.htm\" /><item name=\"Query from CPOS\" url=\"New_Topic.htm\" /><item name=\"Receipt re-print\" url=\"Receipt_re-print.htm\" /></data>";

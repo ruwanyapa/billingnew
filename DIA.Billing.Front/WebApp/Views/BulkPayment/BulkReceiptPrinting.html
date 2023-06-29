@@ -1,0 +1,124 @@
+﻿<h1 ng-bind="Title()"></h1>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="widget">
+                <div class="widget-body">
+                    <form class="form-horizontal" name="bulkReceiptPrinting" novalidate>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div ng-class="" class="form-group">
+                                    <label class="col-sm-5 control-label">Batch ID</label>
+                                    <div class="col-sm-7">
+                                        <div class="input-group">
+                                            <input type="text"
+                                                   class="k-input k-textbox k-fill"
+                                                   readonly="readonly"
+                                                   ng-model="Receipt.BatchNo"
+                                                   name="BatchNo">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default" type="button" ng-click="finderBulkRecePrinting.open()" tooltip title=" {{label.search}}"><i class="icon icon_search"></i></button>
+                                                <button class="btn btn-default" type="button" ng-click="changePageState()" tooltip title="{{label.create}}"><i class="icon icon_plus"></i></button>
+                                            </span>
+                                        </div>
+                                        <div ng-show="" class="ng-hide">
+                                            <p ng-show="" class="help-block ng-hide">
+
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div ng-class="" class="form-group">
+                                    <label class="col-sm-5 control-label">Bulk Upload</label>
+                                    <div class="col-sm-7">
+                                        <div class="input-group">
+                                            <input name="attachFile" multiple="" style="width:100%" type="file" class="btn" file-model="myFile">
+                                            <span class="input-group-btn">
+                                                <button data-toggle="modal" class="btn btn-success btn-sm" ng-click="uploadDocuments()" type="button">Load</button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-sm-5 control-label">Date & Time</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" ng-blur="GetBatchDetails()"
+                                               class="k-input k-textbox k-fill" readonly="readonly" ng-model="Receipt.PrintedDateTime" name="BatchId">
+                                        <div ng-show="" class="ng-hide">
+                                            <p ng-show="" class="help-block ng-hide">
+
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-5 control-label">No of records</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" ng-blur="GetBatchDetails()"
+                                               class="k-input k-textbox k-fill" readonly="readonly" ng-model="Receipt.NoofRecords" name="BatchId">
+                                        <div ng-show="" class="ng-hide">
+                                            <p ng-show="" class="help-block ng-hide">
+
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-5 control-label">Printed User</label>
+                                    <div class="col-sm-7">
+                                        <input type="text"
+                                               class="k-input k-textbox k-fill" readonly="readonly" ng-model="Receipt.UserId" name="BatchId">
+                                        <div ng-show="" class="ng-hide">
+                                            <p ng-show="" class="help-block ng-hide">
+
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="dgGridBulkReceiptPrinting" tabindex="0"
+                                     kendo-grid="dgGridBulkReceiptPrinting"
+                                     ng-init="InitA('dgGridBulkReceiptPrinting')"
+                                     k-options="dgGridBulkRecePrinting.options()">
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <br /> 
+
+
+
+
+
+                    </form>
+                </div>
+            </div>
+
+            <div>
+                <button class="btn btn-success" type="button" ng-disabled="hasListbtnValidation" ng-click="save()">Save </button>
+                <button class="btn btn-success" type="button" ng-disabled="PrintBtnValidation" ng-click="PrintReceipts()">Print All</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<finder-new id="finderBulkRecePrinting"
+            title="{{finderBulkRecePrinting.title}}"
+            params="finderBulkRecePrinting.params"
+            info="finderBulkRecePrinting.info"
+            callback="finderBulkRecePrinting.callback"></finder-new>

@@ -1,0 +1,1 @@
+gXMLBuffer="<?xml version=\"1.0\" encoding=\"UTF-8\"?><cki><ck fm=\"Batch Cancellation\" to=\"System Structure\" num=\"23\"/></cki>";
